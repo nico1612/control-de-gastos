@@ -1,10 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthRouter } from "../login/router";
 import { ControlGastosRouter } from "../controlDeGastos/routes/ControlGastosRouter";
+import { useSelector } from "react-redux";
 
 
 export const AppRouter = () => {
 
+
+    const {status} =useSelector(state=>state.auth)
 
   
     return (

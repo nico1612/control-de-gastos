@@ -1,7 +1,8 @@
+import { Navbar } from "../components"
 
 
 export const ListaCompletaMovimientosPage=()=>{
     return(
-        <h1>hola</h1>
+        <Navbar/>
     )
 }

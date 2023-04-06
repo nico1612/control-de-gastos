@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Link, Navigate } from "react-router-dom"
+import { Navbar } from "../components"
 
 
 export const HomePage=()=>{
@@ -12,11 +13,10 @@ export const HomePage=()=>{
     return(
         <>
 
-        <h1>hola mundo</h1>
+        <Navbar/>
 
-        <Navigate to={"/movimientos"}>
-            <button className="btn btn-primary"></button>
-        </Navigate>
+        
+        
         </>
 
 
