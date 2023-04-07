@@ -1,5 +1,6 @@
 import { checkingCredentials, login } from "./authSlice";
 
+const url=' http://54.242.99.47:3001'
 
 export const startLogin=({email,password})=>{
     return async(dispatch)=>{
@@ -14,7 +15,7 @@ export const startLogin=({email,password})=>{
             body: JSON.stringify({"eMail":email,"password":password})
         };
         //let config=
-        const result=await fetch("http://54.242.99.47:3001/user/login", options)
+        const result=await fetch(`${url}/user/login`, options)
         const {body}=await result.json()
         dispatch( login( body ));
         console.log(body)

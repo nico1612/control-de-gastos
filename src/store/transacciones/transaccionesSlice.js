@@ -30,8 +30,8 @@ export const TransaccionSlice = createSlice({
             state.active = action.payload;
         },
 
-        setTransaccion: (state, action ) => {
-            state.Transaccion=action.payload;
+        setTransacciones: (state, action ) => {
+            state.Transacciones=action.payload;
         },
 
         setSaving: (state ) => {
@@ -74,7 +74,7 @@ export const {
     deleteTransaccionById, 
     savingNewTransaccion,
     setActiveTransaccion,
-    setTransaccion,
+    setTransacciones,
     setSaving,
     updateTransaccion,
 } = TransaccionSlice.actions;

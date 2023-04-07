@@ -1,22 +1,37 @@
-export const startLogin=({email,password})=>{
+import { setTransacciones } from "./transaccionesSlice"
+
+const url= 'http://54.242.99.47:3001'
+
+export const startGettingTransacciones=()=>{
     return async(dispatch)=>{
 
-        dispatch( checkingCredentials() );
+        return async (dispatch,getState)=>{
 
-        const options = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({"eMail":email,"password":password})
-        };
-        //let config=
-        const result=await fetch("http://54.242.99.47:3001/user/login", options)
-        const {body}=await result.json()
-        dispatch( login( body ));
-        console.log(body)
+            const {uid} =getState().auth
+    
+            if(!uid) throw new Error('el uid del usuario no existe')
+    
+            const transacciones= await fetch(`${url}/`)
+    
+            dispatch(setTransacciones(transacciones))
+        }
 
     }
+}
 
+export const startGettingTransaccionesAll=()=>{
+    return async(dispatch)=>{
+
+        return async (dispatch,getState)=>{
+
+            const {uid} =getState().auth
     
+            if(!uid) throw new Error('el uid del usuario no existe')
+    
+            const transacciones= await fetch(`${url}/transaction`)
+    
+            dispatch(setTransacciones(transacciones))
+        }
+
+    }
 }
