@@ -1,15 +1,18 @@
 
 import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
+import { startRegister } from "../../store/auth/thunks"
 
 const formData={ 
     email:'',
+    surname:'',
+    name:'',
     password:''
 }
 
 export const RegisterPage=()=>{
 
-    const {email,password,onInputChange}= useForm(formData)
+    const {email,name,surname,password,onInputChange}= useForm(formData)
 
     const onSubmit=(event)=>{
     
@@ -17,7 +20,7 @@ export const RegisterPage=()=>{
     
         //console.log({email,password})
     
-        dispatch( startLogin({ email, password }) );
+        dispatch( startRegister({ email, password,name,surname }) );
     
     }
 
@@ -30,6 +33,17 @@ export const RegisterPage=()=>{
                 </div>
 
                 <form onSubmit={onSubmit}>
+
+                    <div className="mb-6">
+                        <label className="form-label"> ingresa password</label>
+                        <input type="text" className="form-control" name= "surname" value={surname} onChange={onInputChange}/>
+                    </div>
+
+                    <div className="mb-6">
+                        <label className="form-label"> ingresa password</label>
+                        <input type="text" className="form-control" name= "name" value={name} onChange={onInputChange}/>
+                    </div>
+
                     <div className="mb-6">
                         <label className="form-label"> Correo electronico</label>
                         <input type="email" className="form-control" name= "email" value={email} onChange={onInputChange}/>
@@ -37,8 +51,9 @@ export const RegisterPage=()=>{
 
                     <div className="mb-6">
                         <label className="form-label"> ingresa password</label>
-                        <input type="email" className="form-control" name= "password" value={password} onChange={onInputChange}/>
+                        <input type="password" className="form-control" name= "password" value={password} onChange={onInputChange}/>
                     </div>
+
                     <div className="d-grid">
                         <button type="submit" className="btn btn-primary" > registrarse</button>
                     </div>

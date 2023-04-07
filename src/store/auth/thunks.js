@@ -25,28 +25,23 @@ export const startLogin=({email,password})=>{
     
 }
 
-export const startRegister=({email,password})=>{
+export const startRegister=({email,surname,name,password})=>{
     
     return async(dispatch)=>{
 
+
         dispatch( checkingCredentials() );
 
-        try{
-            let config={
-                method:'POST',
-                header:{
-                    'Accept':'Application/json',
-                    'Content-Type':'Application/json'
-                },
-                body:JSON.stringify({"password":"Ni123456% ","eMail":"nico@gmail.com"})
-            }
-            const data=await fetch("http://54.242.99.47:3001//user/register",config)
-            console.log(data)
-        }
-        catch{
-
-        }
-        
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({"name":name,"surname":surname,"eMail":email,"password":password})
+        };
+        const data=await fetch(`${url}/user/register`,config)
+        console.log(data)
+    
         
         //dispatch( login( email ));
 
