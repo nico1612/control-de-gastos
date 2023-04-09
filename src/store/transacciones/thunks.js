@@ -13,7 +13,7 @@ export const startGettingTransacciones=()=>{
     
             const transacciones= await fetch(`${url}/`)
     
-            dispatch(setTransacciones(transacciones))
+            dispatch(setTransacciones(transacciones.json))
         }
 
     }
