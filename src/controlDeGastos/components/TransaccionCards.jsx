@@ -1,6 +1,7 @@
+import { ButtonModificar } from "./ButtonModificar"
 
 
-export const TransaccionCards=()=>{
+export const TransaccionCards=({transaccion})=>{
 
     return(
         <div className="col animate__animated animate__fadeIn">
@@ -22,7 +23,7 @@ export const TransaccionCards=()=>{
                             <small className="text-muted">{}</small>
                         </p>
 
-                       
+                       <ButtonModificar transaccion={transaccion}/>
                     </div>
                 </div>
             </div>

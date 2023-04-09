@@ -1,21 +1,23 @@
 import { useEffect } from "react"
-import { Link, Navigate } from "react-router-dom"
-import { Navbar } from "../components"
+import { Navbar, TransaccionCards } from "../components"
 import { useDispatch, useSelector } from "react-redux"
-import { TransaccionSlice } from "../../store/transacciones/transaccionesSlice"
 import { startGettingTransacciones } from "../../store/transacciones/thunks"
+import { useNavigate } from "react-router-dom"
 
 
 export const HomePage=()=>{
 
     const dispatch =useDispatch()
+    const navigate=useNavigate()
 
     const {transacciones} =useSelector(state=>state.transacciones)
 
     useEffect(()=>{
         dispatch(startGettingTransacciones())
     },[transacciones])
-    
+    const Movimientos=()=>{
+        navigate("/movimientos")
+    }
     return(
 
         
@@ -25,14 +27,13 @@ export const HomePage=()=>{
 
         
         {
-            transacciones.map(transaccion=>( 
-                <TransaccionSlice key={transaccion.id} {...transaccion}/>
-            ))
-        }
-        <button>
-            <Link to={"/movimientos"}>
-                más..
-            </Link>
+           
+           transacciones.map(transaccion=>( 
+               <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
+           ))
+       }
+        <button onClick={Movimientos}>
+           mas...
         </button> 
         </>
 

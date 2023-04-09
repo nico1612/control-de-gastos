@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux"
-import { Navbar, TransaccionCards } from "../components"
+import { Navbar, TransaccionCards, } from "../components"
 import { useEffect } from "react"
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
-
 
 export const ListaCompletaMovimientosPage=()=>{
 
@@ -18,10 +17,10 @@ export const ListaCompletaMovimientosPage=()=>{
             <Navbar/>
 
             {
-                transacciones.map(transaccion=>( 
-                    <TransaccionCards key={transaccion.id} {...transaccion}/>
-                ))
-            }
-        </>
+           
+           transacciones.map(transaccion=>( 
+               <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
+           ))
+       }        </>
     )
 }

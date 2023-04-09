@@ -1,3 +1,4 @@
+import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
 import { checkingCredentials, login } from "./authSlice";
 
 const url=' http://54.242.99.47:3001'
@@ -46,4 +47,14 @@ export const startRegister=({email,surname,name,password})=>{
         //dispatch( login( email ));
 
     }
+}
+
+export const logout=()=>{
+    return (dispatch)=>{
+
+        dispatch(clearTransaccionLogout())
+        dispatch(logout())
+        
+    }
+
 }
