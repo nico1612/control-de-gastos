@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux"
+import { startEliminar } from "../../store/transacciones/thunks"
 
 
 export const ButtonEliminar=()=>{
@@ -5,7 +7,7 @@ export const ButtonEliminar=()=>{
     const dispatch=useDispatch()
 
     const eliminar=()=>{
-        dispatch(logout)
+       dispatch(startEliminar)
     }
 
     return(

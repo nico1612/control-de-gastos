@@ -17,10 +17,10 @@ export const ListaCompletaMovimientosPage=()=>{
             <Navbar/>
 
             {
-           
-           transacciones.map(transaccion=>( 
-               <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
-           ))
-       }        </>
+                transacciones.map(transaccion=>( 
+                    <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
+                ))
+            }
+       </>
     )
 }
