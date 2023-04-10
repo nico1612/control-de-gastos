@@ -75,3 +75,19 @@ export const startingUpdating=()=>{
     }
 }
 
+export const createNewTramsaccion=({concept,category,amount,transactionType})=>{
+
+    return async(dispatch)=>{
+
+        const formData={
+            user,
+            concept,
+            category,
+            amount,
+            date,
+            transactionType
+        }
+        const {token,userId} = getState().auth;
+
+    }
+}

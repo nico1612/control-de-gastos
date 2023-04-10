@@ -62,7 +62,7 @@ export const ModificarPage=()=>{
     )
 }
 
-/*<div > 
-<input type="radio" name="category" value:"1" onChange={onInputChange} 1
-<input type="radio" name="category" value:"1" onChange={onInputChange} 1 
+/*<div value={}> 
+<input type="radio" name="category" value="1" onChange={onInputChange} 1
+<input type="radio" name="category" value="2" onChange={onInputChange} 2 
 </div>*/
