@@ -45,22 +45,22 @@ export const RegisterPage=()=>{
                 }
                 <form onSubmit={onSubmit}>
 
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-5 text-center">
                         <label className="form-label"> ingresa name</label>
                         <input type="text" className="form-control" name= "name" value={name} onChange={onInputChange}/>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-5 text-center">
                         <label className="form-label"> ingresa surname</label>
                         <input type="text" className="form-control" name= "surname" value={surname} onChange={onInputChange}/>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-5 text-center">
                         <label className="form-label"> Correo electronico</label>
                         <input type="email" className="form-control" name= "email" value={email} onChange={onInputChange}/>
                     </div>
 
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-5 text-center">
                         <label className="form-label"> ingresa password</label>
                         <input type="password" className="form-control" name= "password" value={password} onChange={onInputChange}/>
                     </div>
@@ -69,7 +69,7 @@ export const RegisterPage=()=>{
                         <button type="submit" className="btn btn-primary" > registrarse</button>
                     </div>
                     
-                    <div className="my-3">
+                    <div className="mb-6 col-sm-4-auto  p-5 text-center">
                         <span> tienes cuenta? </span> <Link to={"/auth/login"}>login</Link>
                     </div>
                 </form>

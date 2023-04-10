@@ -39,19 +39,19 @@ export const LoginPage=()=>{
                 }
 
                 <form onSubmit={onSubmit}>
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
                         <label className="form-label"> Correo electronico</label>
                         <input type="email" className="form-control" name= "email" value={email} onChange={onInputChange}/>
                     </div>
-                    <div className="mb-6">
+                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
                         <label className="form-label"> password</label>
                         <input type="password" className="form-control" name= "password" value={password} onChange={onInputChange}/>
                     </div>
-                    <div className="d-grid">
+                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
                         <button type="submit" className="btn btn-primary" onClick={onSubmit} > iniciar sesion</button>
                     </div>
                     
-                    <div className="my-3">
+                    <div className="my-3 mb-6 col-sm-4-auto  p-5 text-center">
                         <span>no tienes cuenta? </span> <Link to={"/auth/register"}>registrarse</Link>
                     </div>
                 </form>
