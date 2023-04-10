@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const TransaccionSlice = createSlice({
-    name: 'Transaccion',
+export const transaccionSlice = createSlice({
+    name: 'transaccion',
     initialState: {
         isSaving: false,
         messageSaved: '',
         Transacciones: [],
+        actualBalance:0,
         active: null,
         // active: {
         //     id: 'ABC123',
@@ -31,7 +32,12 @@ export const TransaccionSlice = createSlice({
         },
 
         setTransacciones: (state, action ) => {
-            state.Transacciones=action.payload;
+            state.Transacciones=action.payload.allTransactions;
+        },
+
+        setTenTransacciones:(state,action)=>{
+            state.Transacciones=action.payload.lastTenTransactions;
+            state.actualBalance=action.payload.actualBalance;
         },
 
         setSaving: (state ) => {
@@ -74,7 +80,8 @@ export const {
     deleteTransaccionById, 
     savingNewTransaccion,
     setActiveTransaccion,
+    setTenTransacciones,
     setTransacciones,
     setSaving,
     updateTransaccion,
-} = TransaccionSlice.actions;
+} = transaccionSlice.actions;

@@ -1,39 +1,29 @@
-import { deleteTransaccionById, setTransacciones } from "./transaccionesSlice"
+import { deleteTransaccionById, setTenTransacciones, setTransacciones } from "./transaccionesSlice"
 
 const url= 'http://54.242.99.47:3001'
 
 export const startGettingTransacciones=()=>{
-    return async(dispatch)=>{
-
-        return async (dispatch,getState)=>{
-
-            const {uid} =getState().auth
     
-            if(!uid) throw new Error('el uid del usuario no existe')
-    
-            const transacciones= await fetch(`${url}/`)
-    
-            dispatch(setTransacciones(transacciones.json))
-        }
+    return async (dispatch,getState)=>{
 
+
+        const transacciones= await fetch(`${url}/`)
+        console.log(transacciones)
+
+        const {body}=await transacciones.json()
+        dispatch(setTenTransacciones(body))
     }
 }
 
 export const startGettingTransaccionesAll=()=>{
-    return async(dispatch)=>{
 
-        return async (dispatch,getState)=>{
+    return async (dispatch,getState)=>{
 
-            const {uid} =getState().auth
-    
-            if(!uid) throw new Error('el uid del usuario no existe')
-    
-            const transacciones= await fetch(`${url}/transaction`)
-            
-            dispatch(setTransacciones(transacciones.json()))
-        }
-
+        const transacciones= await fetch(`${url}/transaction`)
+        const {body}=transacciones.json()
+        dispatch(setTransacciones(body))
     }
+
 }
 
 export const startEliminar=()=>{
@@ -58,6 +48,18 @@ export const startEliminar=()=>{
         
 
     }
+}
 
+export const startingUpdating=()=>{
 
+    return async(dispatch)=>{
+
+        const {token} = getState().auth;
+        const {active:transaccion} = getState().journal
+
+        const docRef = fetch(`${url}/transaction/${transaccion.id}`,)
+        await deleteDoc(docRef)
+
+        dispatch(deleteNoteById(note.id))
+    }
 }

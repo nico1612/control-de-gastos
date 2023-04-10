@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { logout } from "../../store/auth/authSlice"
+import { startLogout } from "../../store/auth/thunks"
 
 
 export const ButtonLogout=()=>{
@@ -7,11 +7,11 @@ export const ButtonLogout=()=>{
     const dispatch=useDispatch()
 
     const logouts=()=>{
-        dispatch(logout)
+        dispatch(startLogout())
     }
 
     return(
-        <button type="button" className="btn btn-warning btn-outline-warning" onClick={logouts}>
+        <button type="button" className="btn btn-warning" onClick={logouts}>
             logout
         </button>
     )

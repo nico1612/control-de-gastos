@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth/authSlice";
-import { TransaccionSlice } from "./transacciones/transaccionesSlice";
+import { transaccionSlice } from "./transacciones/transaccionesSlice";
 
 
 export default configureStore({
   reducer: {
     auth:authSlice.reducer,
-    transaciones:TransaccionSlice.reducer
+    transaciones:transaccionSlice.reducer
   },
 })

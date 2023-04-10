@@ -10,11 +10,15 @@ export const HomePage=()=>{
     const dispatch =useDispatch()
     const navigate=useNavigate()
 
-    const {transacciones} =useSelector(state=>state.transacciones)
+    
+
+    const {Transacciones,actualBalance} =useSelector(state=>state.transaciones)
 
     useEffect(()=>{
+        console.log("hola")
         dispatch(startGettingTransacciones())
-    },[transacciones])
+    },[])
+
     const Movimientos=()=>{
         navigate("/movimientos")
     }
@@ -23,18 +27,24 @@ export const HomePage=()=>{
         
         <>
 
-        <Navbar/>
+            <Navbar/>
 
-        
-        {
-           
-           transacciones.map(transaccion=>( 
-               <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
-           ))
-       }
-        <button onClick={Movimientos}>
-           mas...
-        </button> 
+            <div>monto actual: {actualBalance}</div>
+            
+            <div className="d-grid gap-3">
+                <div className="p-2">
+                    {
+                        Transacciones.map(transaccion=>( 
+                        <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
+                        ))
+                    }
+                </div>
+            </div>
+            
+            <button className="" onClick={Movimientos}>
+            mas...
+            </button> 
+            
         </>
 
 

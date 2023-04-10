@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { startLogin } from "../../store/auth/thunks"
@@ -14,9 +14,10 @@ export const LoginPage=()=>{
     const dispatch =useDispatch()
     const {email,password,onInputChange}= useForm(formData)
     
+    const {error} =useSelector(state=>state.auth)
+
     const onSubmit=(event)=>{
-    
-  
+        console.log(email)
         event.preventDefault()
 
         dispatch( startLogin( {email, password} ) );
@@ -28,6 +29,14 @@ export const LoginPage=()=>{
                 <div className="col">
                     <h2 className="fw-bold text-center py-5">bienvenido</h2>
                 </div>
+
+                {
+                    (error)?
+                    <div class="alert alert-danger" role="alert">
+                        error en usuario o contraseña
+                    </div>
+                    :<></>
+                }
 
                 <form onSubmit={onSubmit}>
                     <div className="mb-6">

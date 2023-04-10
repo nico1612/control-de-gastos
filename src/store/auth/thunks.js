@@ -1,5 +1,5 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
-import { checkingCredentials, login } from "./authSlice";
+import { checkingCredentials, login,logout } from "./authSlice";
 
 const url=' http://54.242.99.47:3001'
 
@@ -15,10 +15,16 @@ export const startLogin=({email,password})=>{
             },
             body: JSON.stringify({"eMail":email,"password":password})
         };
-        //let config=
+        
         const result=await fetch(`${url}/user/login`, options)
         const {body}=await result.json()
-        dispatch( login( body ));
+        if(result.status){
+            console.log(body)
+            dispatch( login( body ));
+        }
+        else{
+            dispatch(logout(result.status))
+        }
         console.log(body)
 
     }
@@ -33,7 +39,7 @@ export const startRegister=({email,surname,name,password})=>{
 
         dispatch( checkingCredentials() );
 
-        const options = {
+        const config = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -44,12 +50,13 @@ export const startRegister=({email,surname,name,password})=>{
         console.log(data)
     
         
-        //dispatch( login( email ));
+        if(data.ok){dispatch( startLogin( {email,password} ));}
+        else{logout(data.ok)}
 
     }
 }
 
-export const logout=()=>{
+export const startLogout=()=>{
     return (dispatch)=>{
 
         dispatch(clearTransaccionLogout())

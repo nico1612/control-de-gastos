@@ -5,13 +5,14 @@ import { setActiveTransaccion } from "../../store/transacciones/transaccionesSli
 
 export const ButtonModificar=({transaccion})=>{
 
-    navigate=useNavigate()
-    dispatch = useDispatch()
-    const modificar=()=>{
+    const navigate=useNavigate()
+    const dispatch = useDispatch()
+    const iniciarModificar=()=>{
+        console.log("hola")
         dispatch(setActiveTransaccion(transaccion))
         navigate("/modificar")
     }
     return(
-        <button type="button" className="btn btn-warning btn-outline-warning" onclick={modificar}>modificar</button>
+        <button type="button" className="btn btn-warning align-center" onClick={iniciarModificar}>modificar</button>
     )
 }
