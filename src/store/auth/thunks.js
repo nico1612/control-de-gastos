@@ -17,15 +17,15 @@ export const startLogin=({email,password})=>{
         };
         
         const result=await fetch(`${url}/user/login`, options)
-        const {body}=await result.json()
         if(result.status){
-            console.log(body)
+            const {body}=await result.json()
+            //console.log(body)
             dispatch( login( body ));
         }
         else{
             dispatch(logout(result.status))
         }
-        console.log(body)
+        console.log(result)
 
     }
 

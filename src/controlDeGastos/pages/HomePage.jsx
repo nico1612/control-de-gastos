@@ -15,7 +15,6 @@ export const HomePage=()=>{
     const {Transacciones,actualBalance} =useSelector(state=>state.transaciones)
 
     useEffect(()=>{
-        console.log("hola")
         dispatch(startGettingTransacciones())
     },[])
 
@@ -41,7 +40,7 @@ export const HomePage=()=>{
                 </div>
             </div>
             
-            <button className="" onClick={Movimientos}>
+            <button onClick={Movimientos}>
             mas...
             </button> 
             

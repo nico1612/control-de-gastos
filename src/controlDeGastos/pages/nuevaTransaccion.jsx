@@ -1,11 +1,9 @@
 import { Navbar } from "../components"
 
 
-export const nuevaTransaccion=()=>{
+export const NuevaTransaccion=()=>{
 
     return(
-        <>
-            <Navbar/>
-        </>
+        <Navbar/>
     )
 }

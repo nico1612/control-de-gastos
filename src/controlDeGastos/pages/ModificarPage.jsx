@@ -4,18 +4,20 @@ import { useFormAction } from "react-router-dom"
 
 export const ModificarPage=()=>{
     const dispatch =useDispatch()
-    const {active} =useSelector(state=>state.transaciones)
-    const {id,user,concept,category,amount,date,transactionType,onInputChange}= useFormAction(active)
+    const {active:transacion} =useSelector(state=>state.transaciones)
+    const {id,user,concept,category,amount,date,transactionType,onInputChange}= useFormAction(transacion)
 
     const eliminar=()=>{
+        console.log(concept)
+
         dispatch(startEliminar())
-     }
+    }
 
     const onSubmit=(event)=>{
 
         event.preventDefault()
 
-        //dispatch( startLogin( {email, password} ) );
+        dispatch(startingUpdating() );
     }
 
     return(
@@ -25,20 +27,20 @@ export const ModificarPage=()=>{
                 <div className="row">
                     <form onSubmit={onSubmit}>
                         <div className="mb-6">
-                            <label className="form-label"> concept</label>
+                            <label className="form-label"> {concept}</label>
                             <input type="email" className="form-control" name= "email" value={concept} onChange={onInputChange}>{concept}</input>
                         </div>
                         <div className="mb-6">
-                            <label className="form-label"> category</label>
+                            <label className="form-label"> {category}</label>
                             <input type="number" className="form-control" name= "category" value={category} onChange={onInputChange}/>
                         </div>
                         
                         <div className="mb-6">
-                            <label className="form-label"> monto</label>
+                            <label className="form-label"> {amount}</label>
                             <input type="number" className="form-control" name= "amount" value={amount} onChange={onInputChange}/>
                         </div>
                         <div className="mb-6">
-                            <label className="form-label"> transactionType</label>
+                            <label className="form-label"> {transactionType}</label>
                             <input type="number" className="form-control" name= "transactionType" value={amount} onChange={onInputChange}/>
                         </div>
                         <br/>
@@ -59,3 +61,8 @@ export const ModificarPage=()=>{
         
     )
 }
+
+/*<div > 
+<input type="radio" name="category" value:"1" onChange={onInputChange} 1
+<input type="radio" name="category" value:"1" onChange={onInputChange} 1 
+</div>*/
