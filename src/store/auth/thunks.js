@@ -1,7 +1,7 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
 import { checkingCredentials, login,logout } from "./authSlice";
 
-const url=' http://54.242.99.47:3001'
+const url=''
 
 export const startLogin=({email,password})=>{
     return async(dispatch)=>{
