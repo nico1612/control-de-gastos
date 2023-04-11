@@ -3,11 +3,11 @@ import { ButtonModificar, Navbar, TransaccionCards, } from "../components"
 import { useEffect } from "react"
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
 import { ButtonInicarCrear } from "../components/ButtonIniciarCrear"
+import { TransaccionList } from "../components/TransaccionList"
 
 export const ListaCompletaMovimientosPage=()=>{
 
     const dispatch =useDispatch()
-    const {Transacciones} =useSelector(state=>state.transaciones)
 
     useEffect(()=>{
         dispatch(startGettingTransaccionesAll())
@@ -16,17 +16,7 @@ export const ListaCompletaMovimientosPage=()=>{
     return(
         <>
             <Navbar/>
-
-            <div className="d-grid gap-3">
-                <div className="p-2">
-
-                    {
-                        Transacciones.map(transaccion=>( 
-                            <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
-                        ))
-                    }
-                </div>
-            </div>
+            <TransaccionList/>
             <ButtonInicarCrear/>
        </>
     )

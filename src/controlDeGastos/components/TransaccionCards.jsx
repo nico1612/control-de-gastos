@@ -2,7 +2,7 @@ import { ButtonModificar } from "./ButtonModificar"
 
 
 export const TransaccionCards=({transaccion})=>{
-
+    const id=transaccion.id
     return(
         <div className="row">
             <div className="col-sm-6 mb-3 mb-sm-0">
@@ -32,7 +32,7 @@ export const TransaccionCards=({transaccion})=>{
                                         <small className="text-muted">transaccion:{transaccion.transactionType}</small>
                                     </p>
 
-                                    <ButtonModificar transaccion={transaccion}/>
+                                    <ButtonModificar id={id}/>
                                 </div>
                             </div>
                         </div>

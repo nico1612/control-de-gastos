@@ -32,7 +32,7 @@ export const transaccionSlice = createSlice({
         },
 
         setTransacciones: (state, action ) => {
-            state.Transacciones=action.payload.allTransactions;
+            state.Transacciones=action.payload.body;
         },
 
         setTenTransacciones:(state,action)=>{

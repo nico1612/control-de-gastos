@@ -1,9 +1,8 @@
 import { useEffect } from "react"
-import { Navbar, TransaccionCards } from "../components"
+import { Navbar, TransaccionList } from "../components"
 import { useDispatch, useSelector } from "react-redux"
 import { startGettingTransacciones } from "../../store/transacciones/thunks"
 import { useNavigate } from "react-router-dom"
-
 
 export const HomePage=()=>{
 
@@ -12,7 +11,7 @@ export const HomePage=()=>{
 
     
 
-    const {Transacciones,actualBalance} =useSelector(state=>state.transaciones)
+    const {actualBalance} =useSelector(state=>state.transaciones)
 
     useEffect(()=>{
         dispatch(startGettingTransacciones())
@@ -22,31 +21,17 @@ export const HomePage=()=>{
         navigate("/movimientos")
     }
     return(
-
-        
         <>
-
             <Navbar/>
-
+            <br/>
             <div>monto actual: {actualBalance}</div>
-            
-            <div className="d-grid gap-3">
-                <div className="p-2">
-                    {
-                        Transacciones.map(transaccion=>( 
-                        <TransaccionCards key={transaccion.id} transaccion={transaccion}/>
-                        ))
-                    }
-                </div>
-            </div>
-            
+            <br/>
+            <TransaccionList/>
+            <br/>
             <button onClick={Movimientos}>
             mas...
             </button> 
             
         </>
-
-
-        
     )
 }

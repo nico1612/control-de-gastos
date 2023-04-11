@@ -1,6 +1,6 @@
 import { deleteTransaccionById, setTenTransacciones, setTransacciones, updateTransaccion } from "./transaccionesSlice"
 
-const url= 'http://54.242.99.47:3001'
+const url= 'http://23.22.128.44:3001'
 
 export const startGettingTransacciones=()=>{
     
@@ -30,19 +30,16 @@ export const startEliminar=()=>{
     return async(dispatch,getState)=>{
         const {token} = getState().auth;
         const {active:transaccion} = getState().transacciones
-
-        const formData =transaccion;
-        //formData.append('first_name', profile.firstName);
-        //formData.append('last_name', profile.lastName);
-        //formData.append('email', profile.email);
-
-        const result=await fetch(`${url}/transaction/${transaccion.id}`, {
+        
+        const option ={
             method: 'DELETE',
             headers:{
                 "token":token
             },
             body: formData
-        })
+        }
+
+        const result=await fetch(`${url}/transaction/${transaccion.id}`,option)
         dispatch(deleteTransaccionById(transaccion.id))       
 
     }
@@ -75,19 +72,13 @@ export const startingUpdating=()=>{
     }
 }
 
-export const createNewTramsaccion=({concept,category,amount,transactionType})=>{
+export const createNewTransaccion=(formData)=>{
 
-    return async(dispatch)=>{
+    return async(dispatch,getState)=>{
 
-        const formData={
-            user,
-            concept,
-            category,
-            amount,
-            date,
-            transactionType
-        }
-        const {token,userId} = getState().auth;
+        const {token} = getState().auth;
+
+        await fetch(`${url}/transaction/new`)
 
     }
 }

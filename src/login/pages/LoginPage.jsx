@@ -13,14 +13,14 @@ export const LoginPage=()=>{
 
     const dispatch =useDispatch()
     const {email,password,onInputChange}= useForm(formData)
-    
+    const fecha=new Date()
     const {error} =useSelector(state=>state.auth)
 
     const onSubmit=(event)=>{
-        console.log(email)
+        console.log(fecha)
         event.preventDefault()
 
-        dispatch( startLogin( {email, password} ) );
+        //dispatch( startLogin( {email, password} ) );
     }
 
     return(
