@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux"
-import { ButtonModificar, Navbar, TransaccionCards, } from "../components"
+import { useDispatch } from "react-redux"
+import {  Navbar } from "../components"
 import { useEffect } from "react"
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
 import { ButtonInicarCrear } from "../components/ButtonIniciarCrear"

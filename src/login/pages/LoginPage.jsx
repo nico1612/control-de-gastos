@@ -17,10 +17,9 @@ export const LoginPage=()=>{
     const {error} =useSelector(state=>state.auth)
 
     const onSubmit=(event)=>{
-        console.log(fecha)
         event.preventDefault()
 
-        //dispatch( startLogin( {email, password} ) );
+        dispatch( startLogin( {email, password} ) );
     }
 
     return(

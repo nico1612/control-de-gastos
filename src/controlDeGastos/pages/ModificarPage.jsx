@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Navbar } from "../components"
-import { startEliminar, startingUpdating } from "../../store/transacciones/thunks"
+import {  startingUpdating } from "../../store/transacciones/thunks"
 import { useForm } from "../../hooks/useForm"
 import { useEffect } from "react"
-import { setActiveTransaccion } from "../../store/transacciones"
+
 let formData
 export const ModificarPage=()=>{
     const dispatch =useDispatch()
@@ -29,17 +29,17 @@ export const ModificarPage=()=>{
         transactionType,
         onInputChange}= useForm(formData)
 
-    const eliminar=()=>{
-        console.log(category)
-        //dispatch(setActiveTransaccion(formData))
-        //dispatch(startEliminar())
-    }
-
+   
     const onSubmit=(event)=>{
 
         event.preventDefault()
-        //dispatch(setActiveTransaccion(formData))
-        dispatch(startingUpdating() );
+       dispatch(startingUpdating({id,
+        user,
+        concept,
+        category,
+        amount,
+        date, 
+        transactionType}));
     }
 
     return(
@@ -104,15 +104,6 @@ export const ModificarPage=()=>{
                             modificar
                         </button>
                     </form>
-                </div>
-            </div>
-            <div className="container-fluid h-100"> 
-                <div className="row w-100">
-                    <div className="d-grid gap-2">
-                        <button type="button" className="btn btn-danger" onClick={eliminar}>
-                            eliminar
-                        </button>
-                    </div>
                 </div>
             </div>
         </>

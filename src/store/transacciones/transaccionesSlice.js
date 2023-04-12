@@ -35,6 +35,10 @@ export const transaccionSlice = createSlice({
             state.Transacciones=action.payload.body;
         },
 
+        setAllTransacciones:(state, action)=>{
+            state.Transacciones=action.payload
+        },
+
         setTenTransacciones:(state,action)=>{
             state.Transacciones=action.payload.lastTenTransactions;
             state.actualBalance=action.payload.actualBalance;
@@ -84,4 +88,5 @@ export const {
     setTransacciones,
     setSaving,
     updateTransaccion,
+    setAllTransacciones,
 } = transaccionSlice.actions;

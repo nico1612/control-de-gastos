@@ -1,7 +1,7 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
 import { checkingCredentials, login,logout } from "./authSlice";
 
-const url='http://23.22.128.44:3001'
+const url='http://34.229.140.16:3001'
 
 export const startLogin=({email,password})=>{
     return async(dispatch)=>{
@@ -17,9 +17,9 @@ export const startLogin=({email,password})=>{
         };
         
         const result=await fetch(`${url}/user/login`, options)
+        console.log(result)
         if(result.status){
             const {body}=await result.json()
-            //console.log(body)
             dispatch( login( body ));
         }
         else{

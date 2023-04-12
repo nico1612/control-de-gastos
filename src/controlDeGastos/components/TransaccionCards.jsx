@@ -1,8 +1,20 @@
-import { ButtonModificar } from "./ButtonModificar"
+import { useDispatch } from "react-redux"
+import { setActiveTransaccion, startEliminar } from "../../store/transacciones"
+import { useNavigate } from "react-router-dom"
 
 
 export const TransaccionCards=({transaccion})=>{
-    const id=transaccion.id
+
+    const Transaccion=transaccion
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+    const eliminar=()=>{
+        dispatch(startEliminar(Transaccion.id))
+    }
+    const iniciarModificar=()=>{
+        dispatch(setActiveTransaccion(Transaccion))
+        navigate("/modificar")
+    }
     return(
         <div className="row">
             <div className="col-sm-6 mb-3 mb-sm-0">
@@ -32,7 +44,19 @@ export const TransaccionCards=({transaccion})=>{
                                         <small className="text-muted">transaccion:{transaccion.transactionType}</small>
                                     </p>
 
-                                    <ButtonModificar id={id}/>
+                                    <button type="button" className="btn btn-warning align-center" onClick={iniciarModificar}>
+                                        modificar
+                                    </button>
+                                    
+                                    <div className="container-fluid h-100"> 
+                                        <div className="row w-100">
+                                            <div className="d-grid gap-2">
+                                                <button type="button" className="btn btn-danger" onClick={eliminar}>
+                                                    eliminar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
