@@ -37,9 +37,26 @@ export const categoriesSlice = createSlice({
             state.isSaving=false;
             state.messageSaved='';
             state.transactionTypes=[];
-            state.categories= [];
+            state.Categories= [];
             state.active=null;
         },
+
+        findCategoryId:(state,{payload})=>{
+            const id= state.Categories.map(categorie=>{
+                if(categorie.name===payload){
+                    return categorie.id
+                }
+            })
+            return id
+        },
+        findTransactionTypesId:(state,{payload})=>{
+            const id= state.transactionTypes.map(transactionType=>{
+                if(transactionType.name===payload){
+                    return transactionType.id
+                }
+            })
+            return id
+        }
 
     }
 });
@@ -49,5 +66,7 @@ export const {
     setCategories,
     setTransactionTypes,
     setSaving,
-    clearTransaccionLogout
+    clearTransaccionLogout,
+    findCategoryId,
+    findTransactionTypesId
 } = categoriesSlice.actions;

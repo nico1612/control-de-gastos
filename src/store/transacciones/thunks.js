@@ -1,4 +1,4 @@
-import { setCategories, setTransactionTypes } from "../categories/categoriesSlice"
+import { findCategoryId, findTransactionTypesId, setCategories, setTransactionTypes } from "../categories/categoriesSlice"
 import { deleteTransaccionById, setAllTransacciones, setTenTransacciones, setTransacciones, updateTransaccion } from "./transaccionesSlice"
 
 const url= 'http://34.229.140.16:3001'
@@ -55,9 +55,8 @@ export const startingUpdating=({id,user,concept,category,amount,date,transaction
     return async(dispatch,getState)=>{
 
         const {token} = getState().auth;
-        const {active:transaccion} = getState().journal
 
-        updateTransaccion={
+       const updateTransaccion={
             id:id,
             user:user,
             concept:concept,
@@ -66,31 +65,34 @@ export const startingUpdating=({id,user,concept,category,amount,date,transaction
             date:date,
             transactionType:transactionType
         }
-        const result = fetch(`${url}/transaction/${transaccion.id}`,{
+        const result = fetch(`${url}/transaction/${id}`,{
             method:"PUT",
-            body:{
-                updateTransaccion
-            }
+            headers:{
+                "Authorization":`bearer ${token}`
+            },
+            body:updateTransaccion
+
         })
         if(result.status)
         dispatch(updateTransaccion(transaccion))
     }
 }
 
-export const createNewTransaccion=(formData)=>{
+export const createNewTransaccion=({transactionType,date,amount,concept,category,userId})=>{
 
     return async(dispatch,getState)=>{
-        const {token,userId} = getState().auth;
-
+        const {token} = getState().auth;
+        const categorieId =dispatch(findCategoryId(category))
+        const transactionTypeId =dispatch(findTransactionTypesId(transactionType))
+        console.log(categorieId,transactionTypeId)
         const formDatas={
-            transactionTypeId:1,
-            date:"2022-08-01T00:00:00.000Z",
-            amount:100000,
-            concept:sueldo,
-            categoryId:1,
+            transactionTypeId:transactionTypeId,
+            date:date,
+            amount:amount,
+            concept:concept,
+            categoryId:categorieId,
             userId:userId
         }
-
         const option ={
             method: 'POST',
             headers:{
@@ -98,7 +100,7 @@ export const createNewTransaccion=(formData)=>{
             },
             body: formDatas
         }
-        await fetch(`${url}/transaction/new`)
+        //await fetch(`${url}/transaction/new`)
 
     }
 }

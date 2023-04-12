@@ -92,10 +92,10 @@ export const ModificarPage=()=>{
                         <div name="transactionType" onChange={onInputChange}>
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos fijos
+                                    <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                    <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Ingresos ocasionales
+                                    <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
                                 </li>
                             </ul>
                         </div>

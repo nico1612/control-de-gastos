@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setActiveTransaccion } from "../../store/transacciones";
 
@@ -7,6 +7,7 @@ export const ButtonInicarCrear=()=>{
 
     const navigate = useNavigate();
     const dispatch= useDispatch()
+    const {userId} =useSelector(state=>state.auth)
     const CrearNueva=()=>{
         dispatch(setActiveTransaccion({
             userId:userId,
