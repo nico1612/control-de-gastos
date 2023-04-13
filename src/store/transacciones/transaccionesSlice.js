@@ -6,6 +6,8 @@ export const transaccionSlice = createSlice({
         isSaving: false,
         messageSaved: '',
         Transacciones: [],
+        Categories: [],
+        TransactionTypes:[],
         actualBalance:0,
         active: null,
         // active: {
@@ -44,6 +46,16 @@ export const transaccionSlice = createSlice({
             state.actualBalance=action.payload.actualBalance;
         },
 
+        setCategories: (state, action ) => {
+            console.log(action.payload)
+            state.Categories=action.payload
+        },
+
+        setTransactionTypes: (state, action ) => {
+            console.log(action.payload)
+            state.TransactionTypes=action.payload;
+        },
+
         setSaving: (state ) => {
             state.isSaving
             state.messageSaved=''
@@ -67,6 +79,8 @@ export const transaccionSlice = createSlice({
             state.isSaving=false;
             state.messageSaved='';
             state.Transacciones=[];
+            state.Transacciones=[],
+            state.Categories=[],
             state.active=null;
         },
 
@@ -74,6 +88,26 @@ export const transaccionSlice = createSlice({
             state.active=null
             state.Transacciones=state.Transacciones.filter(Transaccion=>Transaccion.id!==action.payload)
         },
+        findCategoryId:(state,{payload})=>{
+            console.log(payload)
+            const id= state.Categories.map(categorie=>{
+                if(categorie.name===payload){
+                    return categorie.id
+                }
+            })
+            return id
+        },
+        findTransactionTypesId:(state,{payload})=>{
+            const id= state.TransactionTypes.map(TransactionType=>{
+                if(TransactionType.name===payload){
+                    return TransactionType.id
+                }
+            })
+            
+            
+            return id
+        }
+
     }
 });
 
@@ -89,4 +123,8 @@ export const {
     setSaving,
     updateTransaccion,
     setAllTransacciones,
+    setCategories,
+    setTransactionTypes,
+    findCategoryId,
+    findTransactionTypesId
 } = transaccionSlice.actions;

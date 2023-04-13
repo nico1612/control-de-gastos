@@ -1,5 +1,4 @@
-import { findCategoryId, findTransactionTypesId, setCategories, setTransactionTypes } from "../categories/categoriesSlice"
-import { deleteTransaccionById, setAllTransacciones, setTenTransacciones, setTransacciones, updateTransaccion } from "./transaccionesSlice"
+import { deleteTransaccionById, findCategoryId, findTransactionTypesId, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
 
 const url= 'http://34.229.140.16:3001'
 
@@ -78,13 +77,16 @@ export const startingUpdating=({id,user,concept,category,amount,date,transaction
     }
 }
 
-export const createNewTransaccion=({transactionType,date,amount,concept,category,userId})=>{
+export const createNewTransaccion=({transactionTypes,date,amount,concept,category,userId})=>{
 
     return async(dispatch,getState)=>{
+
+        dispatch(startGettingCategorias())
         const {token} = getState().auth;
-        const categorieId =dispatch(findCategoryId(category))
-        const transactionTypeId =dispatch(findTransactionTypesId(transactionType))
-        console.log(categorieId,transactionTypeId)
+        console.log(token)
+        console.log(getState().categories)
+        const categorieId=dispatch(findCategoryId(category))
+        const transactionTypeId =dispatch(findTransactionTypesId(transactionTypes))
         const formDatas={
             transactionTypeId:transactionTypeId,
             date:date,
@@ -100,6 +102,7 @@ export const createNewTransaccion=({transactionType,date,amount,concept,category
             },
             body: formDatas
         }
+        console.log(categorieId)
         //await fetch(`${url}/transaction/new`)
 
     }

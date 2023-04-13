@@ -30,7 +30,6 @@ export const NuevaTransaccion=()=>{
 
    
     const onSubmit=(event)=>{
-
         event.preventDefault()
         dispatch(createNewTransaccion({
         transactionType,
