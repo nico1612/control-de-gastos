@@ -56,7 +56,6 @@ export const NuevaTransaccion=()=>{
    
     const onSubmit=(event)=>{
         event.preventDefault()
-
         const transactionTypeId =transacionId()
         const categoryId= categoryid(category);
         dispatch(createNewTransaccion({

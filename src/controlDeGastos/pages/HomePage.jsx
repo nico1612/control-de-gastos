@@ -3,6 +3,7 @@ import { TransaccionList } from "../components"
 import { useDispatch, useSelector } from "react-redux"
 import { startGettingTransacciones } from "../../store/transacciones/thunks"
 import { useNavigate } from "react-router-dom"
+import { TransaccionListHome } from "../components/TransaccionListHome"
 
 export const HomePage=()=>{
 
@@ -23,7 +24,7 @@ export const HomePage=()=>{
             <br/>
             <div>monto actual: {actualBalance}</div>
             <br/>
-            <TransaccionList/>
+            <TransaccionListHome/>
             <br/>
             <button onClick={Movimientos}>
             mas...
