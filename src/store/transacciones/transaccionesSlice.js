@@ -47,12 +47,10 @@ export const transaccionSlice = createSlice({
         },
 
         setCategories: (state, action ) => {
-            console.log(action.payload)
             state.Categories=action.payload
         },
 
         setTransactionTypes: (state, action ) => {
-            console.log(action.payload)
             state.TransactionTypes=action.payload;
         },
 
@@ -68,7 +66,7 @@ export const transaccionSlice = createSlice({
                 if(Transaccion.id===action.payload.id){
                     return action.payload
                 }
-                return note
+                return Transaccion
             })
 
             state.messageSaved=`${action.payload.title}, actualizada correctamente`
@@ -88,25 +86,6 @@ export const transaccionSlice = createSlice({
             state.active=null
             state.Transacciones=state.Transacciones.filter(Transaccion=>Transaccion.id!==action.payload)
         },
-        findCategoryId:(state,{payload})=>{
-            console.log(payload)
-            const id= state.Categories.map(categorie=>{
-                if(categorie.name===payload){
-                    return categorie.id
-                }
-            })
-            return id
-        },
-        findTransactionTypesId:(state,{payload})=>{
-            const id= state.TransactionTypes.map(TransactionType=>{
-                if(TransactionType.name===payload){
-                    return TransactionType.id
-                }
-            })
-            
-            
-            return id
-        }
 
     }
 });
@@ -125,6 +104,4 @@ export const {
     setAllTransacciones,
     setCategories,
     setTransactionTypes,
-    findCategoryId,
-    findTransactionTypesId
 } = transaccionSlice.actions;

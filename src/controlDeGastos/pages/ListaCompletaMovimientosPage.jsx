@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux"
-import {  Navbar } from "../components"
 import { useEffect } from "react"
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
 import { ButtonInicarCrear } from "../components/ButtonIniciarCrear"
@@ -15,7 +14,6 @@ export const ListaCompletaMovimientosPage=()=>{
     
     return(
         <>
-            <Navbar/>
             <TransaccionList/>
             <ButtonInicarCrear/>
        </>

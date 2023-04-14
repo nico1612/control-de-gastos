@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Navbar } from "../components"
 import {  startingUpdating } from "../../store/transacciones/thunks"
 import { useForm } from "../../hooks/useForm"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 let formData
 export const ModificarPage=()=>{
     const dispatch =useDispatch()
-    const {active:transacion} =useSelector(state=>state.transaciones)
-    console.log(transacion)
+    const navigate=useNavigate()
+    const {active:transacion,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
+
     useEffect(()=>{
         formData={
             id:transacion.id,
@@ -20,6 +21,27 @@ export const ModificarPage=()=>{
             transactionType:transacion.transactionType
         }
     },[])
+
+    const transacionId=()=>{
+        let id
+        TransactionTypes.map(TransactionTyp=>{
+            if(TransactionTyp.name===transactionType){
+
+                id= TransactionTyp.id
+            }
+        })
+        return id
+    }
+
+    const categoryid=(category)=>{
+        let id
+         Categories.map(categori=>{
+            if(categori.name===category){
+                id= categori.id
+            }
+        })
+        return id
+    }
     const {id,
         user,
         concept,
@@ -31,20 +53,24 @@ export const ModificarPage=()=>{
 
    
     const onSubmit=(event)=>{
-
         event.preventDefault()
-       dispatch(startingUpdating({id,
+
+        const transactionTypeId =transacionId()
+        const categoryId=categoryid(category)
+        dispatch(startingUpdating({id,
         user,
         concept,
         category,
+        categoryId,
         amount,
         date, 
+        transactionTypeId,
         transactionType}));
+        navigate(-1)
     }
 
     return(
         <>
-            <Navbar/>
             <div className="container">
                 <div className="row">
                     <form onSubmit={onSubmit}>
@@ -95,10 +121,10 @@ export const ModificarPage=()=>{
                                     <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                    <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
+                                <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
                                 </li>
                             </ul>
-                        </div>
+                        </div> 
                         <br></br>
                         <button type="button" className="btn btn-success" onClick={onSubmit}>
                             modificar

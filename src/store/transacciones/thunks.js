@@ -1,6 +1,6 @@
-import { deleteTransaccionById, findCategoryId, findTransactionTypesId, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
+import { deleteTransaccionById, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
 
-const url= 'http://34.229.140.16:3001'
+const url= import.meta.env.VITE_APP_IP
 
 export const startGettingTransacciones=()=>{
     
@@ -37,73 +37,98 @@ export const startEliminar=({id})=>{
         const option ={
             method: 'DELETE',
             headers:{
+                "Content-Type": "application/json",
                 "Authorization":`bearer ${token}`
             },
 
         }
 
-        const result=await fetch(`${url}/transaction/${id}`,option)
+        await fetch(`${url}/transaction/${id}`,option)
 
         dispatch(deleteTransaccionById(id))       
 
     }
 }
 
-export const startingUpdating=({id,user,concept,category,amount,date,transactionType})=>{
+export const startingUpdating=({id,
+    user,
+    concept,
+    category,
+    categoryId,
+    amount,
+    date,
+    transactionType,
+    transactionTypeId})=>{
 
     return async(dispatch,getState)=>{
 
         const {token} = getState().auth;
-
-       const updateTransaccion={
+        
+        const formDatas={
+            transactionTypeId:transactionTypeId,
+            date:date,
+            amount:amount,
+            concept:concept,
+            categoryId:categoryId,
+        }
+        const option ={
+            method: 'PATCH',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization":`bearer ${token}`
+            },
+            body: JSON.stringify(formDatas)
+        }
+        console.log(option)
+        const result=await fetch(`${url}/transaction/${id}`,option)
+        const transaccionUpdate={
             id:id,
             user:user,
             concept:concept,
             category:category,
             amount:amount,
             date:date,
-            transactionType:transactionType
+            transactionType:transactionType,  
         }
-        const result = fetch(`${url}/transaction/${id}`,{
-            method:"PUT",
-            headers:{
-                "Authorization":`bearer ${token}`
-            },
-            body:updateTransaccion
-
-        })
-        if(result.status)
-        dispatch(updateTransaccion(transaccion))
+        if(result.status){
+            dispatch(updateTransaccion(transaccionUpdate))
+        }
+        
     }
 }
 
-export const createNewTransaccion=({transactionTypes,date,amount,concept,category,userId})=>{
+export const createNewTransaccion=({transactionTypeId,date,amount,concept,categoryId,transactionType,category})=>{
 
     return async(dispatch,getState)=>{
 
-        dispatch(startGettingCategorias())
-        const {token} = getState().auth;
-        console.log(token)
-        console.log(getState().categories)
-        const categorieId=dispatch(findCategoryId(category))
-        const transactionTypeId =dispatch(findTransactionTypesId(transactionTypes))
+        const {token,userId} = getState().auth;
         const formDatas={
-            transactionTypeId:transactionTypeId,
+            userId:userId,
             date:date,
             amount:amount,
+            transactionTypeId:transactionTypeId,
+            categoryId:categoryId,
             concept:concept,
-            categoryId:categorieId,
-            userId:userId
         }
+        
         const option ={
             method: 'POST',
-            headers:{
+            headers: {
+                "Content-Type": "application/json",
                 "Authorization":`bearer ${token}`
             },
-            body: formDatas
+            body: JSON.stringify({
+                "transactionTypeId":transactionTypeId,
+                "date":date,
+                "amount":amount,
+                "concept":concept,
+                "categoryId":categoryId,
+                "userId":userId
+            })
         }
-        console.log(categorieId)
-        //await fetch(`${url}/transaction/new`)
 
+        console.log(option)
+        const result=await fetch(`${url}/transaction/new`,option)
+        console.log(result)
     }
 }

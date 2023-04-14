@@ -1,11 +1,9 @@
-import { useSelector } from "react-redux"
 import { ButtonLogout } from "./ButtonLogout"
 import { Link } from "react-router-dom"
 
 
 export const Navbar =()=>{
 
-    const {name} =useSelector(state=>state.auth)
     return(
         <nav className="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark border" data-bs-theme="dark">
             <div className="container-fluid">

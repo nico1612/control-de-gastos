@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Navbar } from "../components"
-import {  createNewTransaccion, startingUpdating } from "../../store/transacciones/thunks"
+import {  createNewTransaccion, startGettingTransaccionesAll, startingUpdating } from "../../store/transacciones/thunks"
 import { useForm } from "../../hooks/useForm"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 let formData
 export const NuevaTransaccion=()=>{
     const dispatch =useDispatch()
-    const {active:transacion} =useSelector(state=>state.transaciones)
+    const {active:transacion,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
     const {userId} =useSelector(state=>state.auth)
+    const navigate =useNavigate()
 
     useEffect(()=>{
         formData={
@@ -19,7 +21,30 @@ export const NuevaTransaccion=()=>{
             date:new Date().toJSON(),
             transactionType:transacion.transactionType
         }
+        dispatch(startGettingTransaccionesAll())
     },[])
+
+    const transacionId=()=>{
+        let id
+        TransactionTypes.map(TransactionTyp=>{
+            if(TransactionTyp.name===transactionType){
+
+                id= TransactionTyp.id
+            }
+        })
+        return id
+    }
+
+    const categoryid=(category)=>{
+        let id
+         Categories.map(categori=>{
+            if(categori.name===category){
+                id= categori.id
+            }
+        })
+        return id
+    }
+
     const {
         concept,
         category,
@@ -31,18 +56,23 @@ export const NuevaTransaccion=()=>{
    
     const onSubmit=(event)=>{
         event.preventDefault()
+
+        const transactionTypeId =transacionId()
+        const categoryId= categoryid(category);
         dispatch(createNewTransaccion({
+        transactionTypeId,
         transactionType,
+        category,
         date,
         amount,
         concept,
-        category,
+        categoryId,
         userId}));
+        navigate('/movimientos')
     }
 
     return(
         <>
-            <Navbar/>
             <div className="container">
                 <div className="row">
                     <form onSubmit={onSubmit}>
@@ -85,16 +115,17 @@ export const NuevaTransaccion=()=>{
                         </div>
                         <br></br>
                         <div>transactionType</div>
+
                         <div name="transactionType" onChange={onInputChange}>
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos 
+                                    <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                    <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
+                                <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
                                 </li>
                             </ul>
-                        </div>
+                        </div> 
                         <br></br>
                         <button type="button" className="btn btn-success" onClick={onSubmit}>
                             crear
