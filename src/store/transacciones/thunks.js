@@ -80,7 +80,6 @@ export const startingUpdating=({id,
             },
             body: JSON.stringify(formDatas)
         }
-        console.log(option)
         const result=await fetch(`${url}/transaction/${id}`,option)
         const transaccionUpdate={
             id:id,
@@ -121,7 +120,6 @@ export const createNewTransaccion=({transactionTypeId,date,amount,concept,catego
             body: JSON.stringify(formDatas)
         }
 
-        console.log(JSON.stringify(formDatas))
         await fetch(`${url}/transaction/new` , option)
     }
 }
