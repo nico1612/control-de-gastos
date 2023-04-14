@@ -9,11 +9,11 @@ export const HomePage=()=>{
     const dispatch =useDispatch()
     const navigate=useNavigate()
 
-    const {actualBalance} =useSelector(state=>state.transaciones)
+    const {actualBalance,chance} =useSelector(state=>state.transaciones)
 
     useEffect(()=>{
         dispatch(startGettingTransacciones())
-    },[])
+    },[chance])
 
     const Movimientos=()=>{
         navigate("/movimientos")

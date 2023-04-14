@@ -29,11 +29,12 @@ export const startGettingTransaccionesAll=()=>{
 
 }
 
-export const startEliminar=({id})=>{
+export const startEliminar=()=>{
 
     return async(dispatch,getState)=>{
         const {token} = getState().auth;
-        
+        const {active:transaccion} = getState().transaciones;
+
         const option ={
             method: 'DELETE',
             headers:{
@@ -43,9 +44,9 @@ export const startEliminar=({id})=>{
 
         }
 
-        await fetch(`${url}/transaction/${id}`,option)
+        await fetch(`${url}/transaction/${transaccion.id}`,option)
 
-        dispatch(deleteTransaccionById(id))       
+        dispatch(deleteTransaccionById(transaccion.id))       
 
     }
 }
@@ -117,9 +118,10 @@ export const createNewTransaccion=({transactionTypeId,date,amount,concept,catego
                 "Content-Type": "application/json",
                 "Authorization":`bearer ${token}`
             },
-            body: JSON.stringify({formDatas})
+            body: JSON.stringify(formDatas)
         }
 
+        console.log(JSON.stringify(formDatas))
         await fetch(`${url}/transaction/new` , option)
     }
 }

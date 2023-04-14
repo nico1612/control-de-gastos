@@ -9,7 +9,8 @@ export const TransaccionCards=({transaccion})=>{
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const eliminar=()=>{
-        dispatch(startEliminar(Transaccion.id))
+        dispatch(setActiveTransaccion(transaccion))
+        dispatch(startEliminar())
     }
     const iniciarModificar=()=>{
         dispatch(setActiveTransaccion(Transaccion))

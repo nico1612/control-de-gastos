@@ -8,9 +8,11 @@ export const ListaCompletaMovimientosPage=()=>{
 
     const dispatch =useDispatch()
 
+    const {chance} =useSelector(state=>state.transaciones)
+
     useEffect(()=>{
         dispatch(startGettingTransaccionesAll())
-    },[])
+    },[chance])
     
     return(
         <>

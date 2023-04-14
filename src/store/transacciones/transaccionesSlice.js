@@ -10,6 +10,7 @@ export const transaccionSlice = createSlice({
         TransactionTypes:[],
         actualBalance:0,
         active: null,
+        change:true
         // active: {
         //     id: 'ABC123',
         //     title: '',
@@ -85,6 +86,7 @@ export const transaccionSlice = createSlice({
         deleteTransaccionById: (state, action ) => {
             state.active=null
             state.Transacciones=state.Transacciones.filter(Transaccion=>Transaccion.id!==action.payload)
+            state.change=!state.change
         },
 
     }
