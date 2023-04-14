@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { startLogin } from "../../store/auth/thunks"
+import { useEffect } from "react"
 
 
 const formData={ 
@@ -15,6 +16,11 @@ export const LoginPage=()=>{
     const {email,password,onInputChange}= useForm(formData)
     const fecha=new Date()
     const {error} =useSelector(state=>state.auth)
+
+    useEffect(()=>{
+        if(error)
+        dispatch(setError())
+    })
 
     const onSubmit=(event)=>{
         event.preventDefault()

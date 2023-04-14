@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { useForm } from "../../hooks/useForm"
 import { startRegister } from "../../store/auth/thunks"
 import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { setError } from "../../store/auth/authSlice"
 
 const formData={ 
     email:'',
@@ -18,14 +20,15 @@ export const RegisterPage=()=>{
     const {error} =useSelector(state=>state.auth)
     const dispatch =useDispatch()
 
+    useEffect(()=>{
+        if(error)
+        dispatch(setError())
+    })
     const onSubmit=(event)=>{
     
         event.preventDefault()
     
-        console.log({email,password,name,surname})
-    
         dispatch( startRegister({ email, password,name,surname }) );
-    
     }
 
     return(
@@ -37,7 +40,7 @@ export const RegisterPage=()=>{
                     </div>
                     {
                         (error)?
-                            <div class="alert alert-danger" role="alert">
+                            <div className="alert alert-danger" role="alert">
                                 usuario registrado
                             </div>
                             :<></>

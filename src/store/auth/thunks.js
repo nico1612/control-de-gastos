@@ -1,5 +1,5 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
-import { checkingCredentials, login,logout } from "./authSlice";
+import { checkingCredentials, login,logout, setError } from "./authSlice";
 
 const url=import.meta.env.VITE_APP_IP
 
@@ -7,7 +7,6 @@ export const startLogin=({email,password})=>{
     return async(dispatch)=>{
 
         dispatch( checkingCredentials() );
-        console.log()
         const options = {
             method: "POST",
             headers: {
@@ -18,14 +17,14 @@ export const startLogin=({email,password})=>{
         
         const result=await fetch(`${url}/user/login`, options)
         console.log(result)
-        if(result.status){
+        if(result.ok){
             const {body}=await result.json()
             dispatch( login( body ));
         }
         else{
             dispatch(logout(result.status))
+            dispatch(setError())
         }
-        console.log(result)
 
     }
 
@@ -47,11 +46,14 @@ export const startRegister=({email,surname,name,password})=>{
             body: JSON.stringify({"name":name,"surname":surname,"eMail":email,"password":password})
         };
         const data=await fetch(`${url}/user/register`,config)
-        console.log(data)
     
         
         if(data.ok){dispatch( startLogin( {email,password} ));}
-        else{logout(data.ok)}
+        else{
+            dispatch(logout(data.ok))
+            dispatch(setError())
+
+        }
 
     }
 }
