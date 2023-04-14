@@ -103,12 +103,12 @@ export const createNewTransaccion=({transactionTypeId,date,amount,concept,catego
 
         const {token,userId} = getState().auth;
         const formDatas={
-            userId:userId,
-            date:date,
-            amount:amount,
-            transactionTypeId:transactionTypeId,
-            categoryId:categoryId,
-            concept:concept,
+            "userId":userId,
+            "concept":concept,
+            "categoryId":categoryId,
+            "amount":amount,
+            "date":date,
+            "transactionTypeId":transactionTypeId,
         }
         
         const option ={
@@ -117,18 +117,9 @@ export const createNewTransaccion=({transactionTypeId,date,amount,concept,catego
                 "Content-Type": "application/json",
                 "Authorization":`bearer ${token}`
             },
-            body: JSON.stringify({
-                "transactionTypeId":transactionTypeId,
-                "date":date,
-                "amount":amount,
-                "concept":concept,
-                "categoryId":categoryId,
-                "userId":userId
-            })
+            body: JSON.stringify({formDatas})
         }
 
-        console.log(option)
-        const result=await fetch(`${url}/transaction/new`,option)
-        console.log(result)
+        await fetch(`${url}/transaction/new` , option)
     }
 }
