@@ -1,7 +1,7 @@
 
 
 export const crearTransaccion=async({data,token})=>{
-    const url='http://54.221.175.120:3001'
+    const url=import.meta.env.VITE_APP_IP
     const formData={
         transactionTypeId:data.TransactionTypeId,
         date:data.date,

@@ -1,8 +1,7 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
 import { checkingCredentials, login,logout, setError } from "./authSlice";
 
-const url='http://54.221.175.120:3001'
-const urls =import.meta.env.VITE_APP_IP
+const url=import.meta.env.VITE_APP_IP
 
 export const startLogin=({Email, Password})=>{
     return async(dispatch)=>{
