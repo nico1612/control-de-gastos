@@ -14,15 +14,15 @@ export const TransaccionCardsHome=({Transaction})=>{
                             <div className="card-body">
                                 <h5 className="card-title">de: {Transaction.user}</h5>
 
-                                <Parrafo Inicio={'concepto'}  Value={Transaction.concept}/>
+                                <Parrafo Init={'concepto'}  Value={Transaction.concept}/>
                                 
-                                <Parrafo Inicio={'categoria'}  Value={Transaction.category}/>
+                                <Parrafo Init={'categoria'}  Value={Transaction.category}/>
                                 
-                                <Parrafo Inicio={'monto'}  Value={Transaction.amount}/>
+                                <Parrafo Init={'monto'}  Value={Transaction.amount}/>
 
-                                <Parrafo Inicio={'día'}  Value={Transaction.date}/>
+                                <Parrafo Init={'día'}  Value={Transaction.date}/>
 
-                                <Parrafo Inicio={'transacción'}  Value={Transaction.transactionType}/>
+                                <Parrafo Init={'transacción'}  Value={Transaction.transactionType}/>
 
                             </div>
                         </div>

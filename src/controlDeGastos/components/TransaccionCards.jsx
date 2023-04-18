@@ -26,15 +26,15 @@ export const TransaccionCards=({Transaction})=>{
                         <div className="card-body">
                             <h5 className="card-title">de:{Transaction.user}</h5>
 
-                            <Parrafo Inicio={'Concepto'} Value={Transaction.concept}/>
+                            <Parrafo Init={'Concepto'} Value={Transaction.concept}/>
                             
-                            <Parrafo Inicio={'Categoria'} Value={Transaction.category}/>
+                            <Parrafo Init={'Categoria'} Value={Transaction.category}/>
 
-                            <Parrafo Inicio={'Monto'} Value={Transaction.amount}/>
+                            <Parrafo Init={'Monto'} Value={Transaction.amount}/>
 
                             <Parrafo Inicio={'Día'} Value={Transaction.date}/>
 
-                            <Parrafo Inicio={'Transacción'} Value={Transaction.transaccion}/>
+                            <Parrafo Init={'Transacción'} Value={Transaction.transaccion}/>
                             
                             <Button Funcion={iniciarModificar} Name={'Modificar'} />
                             

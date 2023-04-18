@@ -1,9 +1,9 @@
 
 
-export const Parrafo=({Inicio,Value})=>{
+export const Parrafo=({Init,Value})=>{
     
     return(
-        <p className="card-text">{Inicio}: {Value} </p>
+        <p className="card-text">{Init}: {Value} </p>
 
     )
 }
