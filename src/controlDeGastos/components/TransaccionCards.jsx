@@ -7,15 +7,15 @@ import { Parrafo } from "./Parrafo"
 
 export const TransaccionCards=({Transaction})=>{
 
-    const Transaction=Transaction
+    const TransactionActual=Transaction
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const eliminar=()=>{
-        dispatch(setActiveTransaccion(Transaction))
+        dispatch(setActiveTransaccion(TransactionActual))
         dispatch(startEliminar())
     }
     const iniciarModificar=()=>{
-        dispatch(setActiveTransaccion(Transaction))
+        dispatch(setActiveTransaccion(TransactionActual))
         navigate("/modificar")
     }
     return(
