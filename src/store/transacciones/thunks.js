@@ -1,6 +1,7 @@
 import { deleteTransaccionById, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
 
-const url= import.meta.env.VITE_APP_IP
+const url='http://54.221.175.120:3001'
+const urls= import.meta.env.VITE_APP_IP
 
 export const startGettingTransacciones=()=>{
     
@@ -51,47 +52,25 @@ export const startEliminar=()=>{
     }
 }
 
-export const startingUpdating=({id,
-    user,
-    concept,
-    category,
-    categoryId,
-    amount,
-    date,
-    transactionType,
-    transactionTypeId})=>{
+export const startingUpdating=({Id,Datas,TransaccionUpdate})=>{
 
     return async(dispatch,getState)=>{
 
         const {token} = getState().auth;
         
-        const formDatas={
-            transactionTypeId:transactionTypeId,
-            date:date,
-            amount:amount,
-            concept:concept,
-            categoryId:categoryId,
-        }
+        
         const option ={
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
                 "Authorization":`bearer ${token}`
             },
-            body: JSON.stringify(formDatas)
+            body: JSON.stringify(Datas)
         }
-        const result=await fetch(`${url}/transaction/${id}`,option)
-        const transaccionUpdate={
-            id:id,
-            user:user,
-            concept:concept,
-            category:category,
-            amount:amount,
-            date:date,
-            transactionType:transactionType,  
-        }
+        const result=await fetch(`${url}/transaction/${Id}`,option)
+        
         if(result.status){
-            dispatch(updateTransaccion(transaccionUpdate))
+            dispatch(updateTransaccion(TransaccionUpdate))
         }
         
     }

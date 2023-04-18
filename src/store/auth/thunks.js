@@ -1,9 +1,10 @@
 import { clearTransaccionLogout } from "../transacciones/transaccionesSlice";
 import { checkingCredentials, login,logout, setError } from "./authSlice";
 
-const url=import.meta.env.VITE_APP_IP
+const url='http://54.221.175.120:3001'
+const urls =import.meta.env.VITE_APP_IP
 
-export const startLogin=({email,password})=>{
+export const startLogin=({Email, Password})=>{
     return async(dispatch)=>{
 
         dispatch( checkingCredentials() );
@@ -12,9 +13,9 @@ export const startLogin=({email,password})=>{
             headers: {
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({"eMail":email,"password":password})
+            body: JSON.stringify({"eMail":Email,"password":Password})
         };
-        
+        console.log(Email)
         const result=await fetch(`${url}/user/login`, options)
         console.log(result)
         if(result.ok){

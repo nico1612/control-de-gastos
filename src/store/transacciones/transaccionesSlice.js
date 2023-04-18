@@ -5,7 +5,7 @@ export const transaccionSlice = createSlice({
     initialState: {
         isSaving: false,
         messageSaved: '',
-        Transacciones: [],
+        Transactions: [],
         Categories: [],
         TransactionTypes:[],
         actualBalance:0,
@@ -26,7 +26,7 @@ export const transaccionSlice = createSlice({
         },
         
         addNewEmptyTransaccion: (state, action ) => {
-            state.Transacciones.push( action.payload );
+            state.Transactions.push( action.payload );
             state.isSaving = false;
         },
 
@@ -35,15 +35,15 @@ export const transaccionSlice = createSlice({
         },
 
         setTransacciones: (state, action ) => {
-            state.Transacciones=action.payload.body;
+            state.Transactions=action.payload.body;
         },
 
         setAllTransacciones:(state, action)=>{
-            state.Transacciones=action.payload
+            state.Transactions=action.payload
         },
 
         setTenTransacciones:(state,action)=>{
-            state.Transacciones=action.payload.lastTenTransactions;
+            state.Transactions=action.payload.lastTenTransactions;
             state.actualBalance=action.payload.actualBalance;
         },
 
@@ -62,12 +62,12 @@ export const transaccionSlice = createSlice({
 
         updateTransaccion: (state, action ) => { 
             state.isSaving=false;
-            state.Transacciones=state.Transacciones.map(Transaccion=>{
+            state.Transactions=state.Transactions.map(Transaction=>{
 
-                if(Transaccion.id===action.payload.id){
+                if(Transaction.id===action.payload.id){
                     return action.payload
                 }
-                return Transaccion
+                return Transaction
             })
 
             state.messageSaved=`${action.payload.title}, actualizada correctamente`
@@ -77,8 +77,8 @@ export const transaccionSlice = createSlice({
         clearTransaccionLogout: (state) => {
             state.isSaving=false;
             state.messageSaved='';
-            state.Transacciones=[];
-            state.Transacciones=[],
+            state.Transactions=[];
+            state.TransactionTypes=[],
             state.Categories=[],
             state.active=null;
         },

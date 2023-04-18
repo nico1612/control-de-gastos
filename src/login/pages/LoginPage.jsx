@@ -1,20 +1,27 @@
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { useForm } from "../../hooks/useForm"
-import { startLogin } from "../../store/auth/thunks"
 import { useEffect } from "react"
 
+import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+
+import { startLogin } from "../../store/auth/thunks"
+import { setError } from "../../store/auth/authSlice"
+import { useError, useForm } from "../../hooks"
+import { checkFormLogin } from "../helpers"
 
 const formData={ 
-    email:'',
-    password:''
+    Email:'',
+    Password:''
 }
 
 export const LoginPage=()=>{
 
     const dispatch =useDispatch()
-    const {email,password,onInputChange}= useForm(formData)
-    const fecha=new Date()
+    const {Email,Password,onInputChange}= useForm(formData)
+    const {ErrorMail,
+        setErrorMail,
+        ErrorPassword,
+        setErrorPassword
+    }= useError()
     const {error} =useSelector(state=>state.auth)
 
     useEffect(()=>{
@@ -24,8 +31,15 @@ export const LoginPage=()=>{
 
     const onSubmit=(event)=>{
         event.preventDefault()
-
-        dispatch( startLogin( {email, password} ) );
+        
+        if(checkFormLogin({Email,
+            Password,
+            setErrorMail,
+            setErrorPassword,
+            })){
+            dispatch( startLogin( {Email, Password} ) );
+        }
+        
     }
 
     return(
@@ -36,27 +50,50 @@ export const LoginPage=()=>{
                 </div>
 
                 {
-                    (error)?
-                    <div class="alert alert-danger" role="alert">
+                    (error) &&
+                    <div className="alert alert-danger" role="alert">
                         error en usuario o contraseña
                     </div>
-                    :<></>
                 }
 
                 <form onSubmit={onSubmit}>
-                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
-                        <label className="form-label"> Correo electronico</label>
-                        <input type="email" className="form-control" name= "email" value={email} onChange={onInputChange}/>
-                    </div>
-                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
-                        <label className="form-label"> password</label>
-                        <input type="password" className="form-control" name= "password" value={password} onChange={onInputChange}/>
-                    </div>
-                    <div className="mb-6 col-sm-4-auto  p-4 text-center">
+                    
+
+                    {
+                        (ErrorMail)
+                        ?<>
+                            <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
+                                <label className="form-label"> mail</label>
+                                <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
+                            </div> <p>mail es requerido correctamente</p>
+                        </>
+                        :<div className="mb-6 col-sm-4-auto p-4 text-center">
+                            <label className="form-label"> mail</label>
+                            <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
+                        </div>
+                    }
+
+                    {
+                        (!ErrorPassword)
+                        ?<div className="mb-6 col-sm-4-auto p-4 text-center">
+                            <label className="form-label"> password</label>
+                            <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                        </div>
+                        :<>
+                            <div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
+                                <label className="form-label"> password</label>
+                                <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                            </div>
+                            <p>contraseña es requerido</p>
+                        </>
+                    }
+                    
+                    
+                    <div className="mb-6 col-sm-4-auto p-4 text-center">
                         <button type="submit" className="btn btn-primary" onClick={onSubmit} > iniciar sesion</button>
                     </div>
                     
-                    <div className="my-3 mb-6 col-sm-4-auto  p-5 text-center">
+                    <div className="my-3 mb-6 col-sm-4-auto p-5 text-center">
                         <span>no tienes cuenta? </span> <Link to={"/auth/register"}>registrarse</Link>
                     </div>
                 </form>

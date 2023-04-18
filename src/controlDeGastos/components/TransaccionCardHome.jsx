@@ -1,43 +1,34 @@
+import { Parrafo } from "./Parrafo"
 
 
 
-export const TransaccionCardsHome=({transaccion})=>{
+export const TransaccionCardsHome=({Transaction})=>{
 
   
     return(
-        <div className="row">
-            <div className="col-sm-6 mb-3 mb-sm-0">
-                <div className="col animate__animated animate__fadeIn">
-                    <div className="card">
-                        <div className="row no-gutter">
-                        
-                            <div>
-                                <div className="card-body">
-                                    <h5 className="card-title">de:{transaccion.user}</h5>
+        <>        
+            <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="card">
+                    <div className="row no-gutter">
+                        <div>
+                            <div className="card-body">
+                                <h5 className="card-title">de: {Transaction.user}</h5>
 
-                                    <p className="card-text">concepto:{transaccion.concept} </p>
-                                    
-                                    
-                                    <p className="card-text">
-                                        <small className="text-muted">categoria:{transaccion.category}</small>
-                                    </p>
+                                <Parrafo Inicio={'concepto'}  Value={Transaction.concept}/>
+                                
+                                <Parrafo Inicio={'categoria'}  Value={Transaction.category}/>
+                                
+                                <Parrafo Inicio={'monto'}  Value={Transaction.amount}/>
 
-                                    <p className="card-text">
-                                        <small className="text-muted">monto:{transaccion.amount}</small>
-                                    </p>
+                                <Parrafo Inicio={'día'}  Value={Transaction.date}/>
 
-                                    <p className="card-text">
-                                        <small className="text-muted">dia:{transaccion.date}</small>
-                                    </p>
-                                    <p className="card-text">
-                                        <small className="text-muted">transaccion:{transaccion.transactionType}</small>
-                                    </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <Parrafo Inicio={'transacción'}  Value={Transaction.transactionType}/>
+
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </>
     )
 }

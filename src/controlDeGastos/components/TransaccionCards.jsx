@@ -1,62 +1,47 @@
 import { useDispatch } from "react-redux"
 import { setActiveTransaccion, startEliminar } from "../../store/transacciones"
 import { useNavigate } from "react-router-dom"
+import { Button } from "./Button"
+import { Parrafo } from "./Parrafo"
 
 
-export const TransaccionCards=({transaccion})=>{
+export const TransaccionCards=({Transaction})=>{
 
-    const Transaccion=transaccion
+    const Transaction=Transaction
     const dispatch=useDispatch()
     const navigate=useNavigate()
     const eliminar=()=>{
-        dispatch(setActiveTransaccion(transaccion))
+        dispatch(setActiveTransaccion(Transaction))
         dispatch(startEliminar())
     }
     const iniciarModificar=()=>{
-        dispatch(setActiveTransaccion(Transaccion))
+        dispatch(setActiveTransaccion(Transaction))
         navigate("/modificar")
     }
     return(
-        <div className="row">
-            <div className="col-sm-6 mb-3 mb-sm-0">
-                <div className="col animate__animated animate__fadeIn">
-                    <div className="card">
-                        <div className="row no-gutter">
-                        
-                            <div>
-                                <div className="card-body">
-                                    <h5 className="card-title">de:{transaccion.user}</h5>
+        <div className="row col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <div className="card">
+                <div className="row no-gutter">
+                    <div>
+                        <div className="card-body">
+                            <h5 className="card-title">de:{Transaction.user}</h5>
 
-                                    <p className="card-text">concepto:{transaccion.concept} </p>
-                                    
-                                    
-                                    <p className="card-text">
-                                        <small className="text-muted">categoria:{transaccion.category}</small>
-                                    </p>
+                            <Parrafo Inicio={'Concepto'} Value={Transaction.concept}/>
+                            
+                            <Parrafo Inicio={'Categoria'} Value={Transaction.category}/>
 
-                                    <p className="card-text">
-                                        <small className="text-muted">monto:{transaccion.amount}</small>
-                                    </p>
+                            <Parrafo Inicio={'Monto'} Value={Transaction.amount}/>
 
-                                    <p className="card-text">
-                                        <small className="text-muted">dia:{transaccion.date}</small>
-                                    </p>
-                                    <p className="card-text">
-                                        <small className="text-muted">transaccion:{transaccion.transactionType}</small>
-                                    </p>
+                            <Parrafo Inicio={'Día'} Value={Transaction.date}/>
 
-                                    <button type="button" className="btn btn-warning align-center" onClick={iniciarModificar}>
-                                        modificar
-                                    </button>
-                                    
-                                    <div className="container-fluid h-100"> 
-                                        <div className="row w-100">
-                                            <div className="d-grid gap-2">
-                                                <button type="button" className="btn btn-danger" onClick={eliminar}>
-                                                    eliminar
-                                                </button>
-                                            </div>
-                                        </div>
+                            <Parrafo Inicio={'Transacción'} Value={Transaction.transaccion}/>
+                            
+                            <Button Funcion={iniciarModificar} Name={'Modificar'} />
+                            
+                            <div className="container-fluid h-100"> 
+                                <div className="row w-100">
+                                    <div className="d-grid gap-2">
+                                        <Button Funcion={eliminar} Name={'Eliminar'}/>
                                     </div>
                                 </div>
                             </div>

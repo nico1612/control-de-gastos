@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+
+import { useDispatch, useSelector } from "react-redux"
+
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
-import { ButtonInicarCrear } from "../components/ButtonIniciarCrear"
-import { TransaccionList } from "../components/TransaccionList"
+import { ButtonInicarCrear, TransaccionList } from "../components"
 
 export const ListaCompletaMovimientosPage=()=>{
 
@@ -16,8 +17,14 @@ export const ListaCompletaMovimientosPage=()=>{
     
     return(
         <>
+            <br/>
             <TransaccionList/>
-            <ButtonInicarCrear/>
+            <br/>
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <ButtonInicarCrear/>
+                </div>
+            </div>
        </>
     )
 }

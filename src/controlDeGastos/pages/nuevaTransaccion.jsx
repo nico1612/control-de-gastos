@@ -1,72 +1,61 @@
-import { useDispatch, useSelector } from "react-redux"
-import { Navbar } from "../components"
-import {  createNewTransaccion, startGettingTransaccionesAll, startingUpdating } from "../../store/transacciones/thunks"
-import { useForm } from "../../hooks/useForm"
 import { useEffect } from "react"
+
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+
+import { categoryId, transacionId } from "../helpers"
+import {  createNewTransaccion, startGettingTransaccionesAll } from "../../store/transacciones/thunks"
+import { useForm } from "../../hooks"
+import { crearTransaccion } from "../helpers/CrearTransaccion"
+
 
 let formData
 export const NuevaTransaccion=()=>{
     const dispatch =useDispatch()
-    const {active:transacion,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
-    const {userId} =useSelector(state=>state.auth)
+    const {active:Transaction,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
+    const {userId,token} =useSelector(state=>state.auth)
     const navigate =useNavigate()
 
     useEffect(()=>{
         formData={
-            userId:userId,
-            concept:transacion.concept,
-            category:transacion.category,
-            amount:transacion.amount,
-            date:new Date().toJSON(),
-            transactionType:transacion.transactionType
+            UserId:userId,
+            Concept:Transaction.concept,
+            Category:Transaction.category,
+            Amount:Transaction.amount,
+            date:new Date()            ,
+            TransactionType:Transaction.transactionType
         }
         dispatch(startGettingTransaccionesAll())
     },[])
 
-    const transacionId=()=>{
-        let id
-        TransactionTypes.map(TransactionTyp=>{
-            if(TransactionTyp.name===transactionType){
-
-                id= TransactionTyp.id
-            }
-        })
-        return id
-    }
-
-    const categoryid=(category)=>{
-        let id
-         Categories.map(categori=>{
-            if(categori.name===category){
-                id= categori.id
-            }
-        })
-        return id
-    }
 
     const {
-        concept,
-        category,
-        amount,
+        Concept,
+        Category,
+        Amount,
         date,
-        transactionType,
+        TransactionType,
         onInputChange}= useForm(formData)
 
    
     const onSubmit=(event)=>{
         event.preventDefault()
-        const transactionTypeId =transacionId()
-        const categoryId= categoryid(category);
-        dispatch(createNewTransaccion({
-        transactionTypeId,
-        transactionType,
-        category,
-        date,
-        amount,
-        concept,
-        categoryId,
-        userId}));
+        const TransactionTypeId =transacionId({TransactionType,TransactionTypes})
+        const CategoryId= categoryId({Category, Categories});
+        const data={
+            userId,
+            Concept,
+            CategoryId,
+            Amount,
+            date,
+            TransactionTypeId,
+        }
+        crearTransaccion({data,token})
+        /*dispatch(createNewTransaccion({
+            data,
+            TransactionType,
+            Category,
+        }));*/
         navigate('/movimientos')
     }
 
@@ -78,50 +67,50 @@ export const NuevaTransaccion=()=>{
                       
                         <br/>
                         <div>
-                            <label className="form-label">concept </label>
-                            <input type="text" className="form-control" name= "concept" value={concept} onChange={onInputChange}/>
+                            <label className="form-label">concepto </label>
+                            <input type="text" className="form-control" name= "Concept" value={Concept} onChange={onInputChange}/>
                         </div>
                         <br/>
-                        <div>category</div>
+                        <div>categoria</div>
                         <div>
                             <div name="category" onChange={onInputChange}>
                                 <ul className="list-group">
                                     <li className="list-group-item">
-                                        <input type="radio" value="Ingresos fijos" name="category"  checked={("Ingresos fijos"===category)} /> Ingresos fijos
+                                        <input type="radio" value="Ingresos fijos" name="Category"  checked={("Ingresos fijos"===Category)} /> Ingresos fijos
                                     </li>
                                     <li className="list-group-item">
-                                    <input type="radio" value="Ingresos ocasionales" name="category" checked={("Ingresos ocasionales"===category)} /> Ingresos ocasionales
+                                    <input type="radio" value="Ingresos ocasionales" name="Category" checked={("Ingresos ocasionales"===Category)} /> Ingresos ocasionales
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Viáticos" name="category" checked={("Viáticos"===category)} />Viáticos
+                                        <input type="radio" value="Viáticos" name="Category" checked={("Viáticos"===Category)} />Viáticos
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Alimentos y bebidas" name="category" checked={("Alimentos y bebidas"===category)} /> Alimentos y bebidas
+                                        <input type="radio" value="Alimentos y bebidas" name="Category" checked={("Alimentos y bebidas"===Category)} /> Alimentos y bebidas
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Víveres" name="category" checked={("Víveres"===category)} /> Víveres
+                                        <input type="radio" value="Víveres" name="Category" checked={("Víveres"===Category)} /> Víveres
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Salidas" name="category" checked={("Salidas"===category)} /> Salidas
+                                        <input type="radio" value="Salidas" name="Category" checked={("Salidas"===Category)} /> Salidas
                                     </li>
                                 </ul>
                             </div>                        
                         </div>
                         <br/>
                         <div>
-                            <label className="form-label">amount </label>
-                            <input type="text" className="form-control" name= "amount" value={amount} onChange={onInputChange}/>
+                            <label className="form-label">monto </label>
+                            <input type="text" className="form-control" name= "Amount" value={Amount} onChange={onInputChange}/>
                         </div>
                         <br></br>
                         <div>transactionType</div>
 
-                        <div name="transactionType" onChange={onInputChange}>
+                        <div name="TransactionType" onChange={onInputChange}>
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <input type="radio" value="Ingresos" name="transactionType"  checked={("Ingresos"===transactionType)} /> Ingresos
+                                    <input type="radio" value="Ingresos" name="TransactionType"  checked={("Ingresos"===TransactionType)} /> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                <input type="radio" value="Egresos" name="transactionType" checked={("Egresos"===transactionType)} /> Egresos
+                                <input type="radio" value="Egresos" name="TransactionType" checked={("Egresos"===TransactionType)} /> Egresos
                                 </li>
                             </ul>
                         </div> 

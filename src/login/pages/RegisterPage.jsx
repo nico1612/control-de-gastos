@@ -1,34 +1,53 @@
 
-import { Link } from "react-router-dom"
-import { useForm } from "../../hooks/useForm"
-import { startRegister } from "../../store/auth/thunks"
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
+
+import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+
+import { startRegister } from "../../store/auth/thunks"
 import { setError } from "../../store/auth/authSlice"
+import { useError, useForm } from "../../hooks"
+import { checkFormRegister } from "../helpers"
 
 const formData={ 
-    email:'',
-    surname:'',
-    name:'',
-    password:''
+    Email:'',
+    Surname:'',
+    Name:'',
+    Password:''
 }
 
 export const RegisterPage=()=>{
 
-    const {email,name,surname,password,onInputChange}= useForm(formData)
+    const {Email,Name,Surname,Password,onInputChange}= useForm(formData)
 
     const {error} =useSelector(state=>state.auth)
     const dispatch =useDispatch()
-
+    const {ErrorMail,
+        setErrorMail,
+        ErrorPassword,
+        setErrorPassword,
+        ErrorName,
+        setErrorName,
+        ErrorSurname,
+        setErrorSurname}= useError()
     useEffect(()=>{
         if(error)
         dispatch(setError())
     })
     const onSubmit=(event)=>{
-    
+
         event.preventDefault()
-    
-        dispatch( startRegister({ email, password,name,surname }) );
+        if(checkFormRegister({ErrorName,Email,
+            Password,
+            Name,
+            Surname,
+            setErrorMail,
+            setErrorName,
+            setErrorPassword,
+            setErrorSurname})){
+
+            dispatch( startRegister({ Email, Password,Name,Surname }) );
+        }
     }
 
     return(
@@ -39,62 +58,84 @@ export const RegisterPage=()=>{
                         <h2 className="fw-bold text-center py-5">registrese</h2>
                     </div>
                     {
-                        (error)?
-                            <div className="alert alert-danger" role="alert">
+                        (error) && <div className="alert alert-danger" role="alert">
                                 usuario registrado
                             </div>
-                            :<></>
-
                     }
+
                     <form className="col-xs-12" onSubmit={onSubmit}>
-                        <div className="row g-3 align-items-center">
-                            <div className="col-auto">
-                                <label className="form-label"> ingrese nombre</label>
-                            </div>
-                            <div className="col-auto">
-                                <input type="text" className="form-control" name= "name" value={name} onChange={onInputChange}/>
-                            </div>
+
+
+                    {(ErrorName)
+                        ?<>
+                        <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
+                            <label className="form-label"> nombre</label>
+                            <input type="text" className="form-control" name= "Name" value={Name} onChange={onInputChange}/>
                         </div>
-                        <br/>
-                        <div className="row g-3 align-items-center">
-                            <div className="col-auto">
-                                <label className="form-label"> ingresa surname</label>
-                            </div>
-                            <div className="col-auto">
-                                <input type="text" className="form-control" name= "surname" value={surname} onChange={onInputChange}/>
-                            </div>
+                        <p>nombre es requerido</p>
+                        </>
+                        :<div className="mb-6 col-sm-4-auto p-4 text-center">
+                            <label className="form-label"> nombre</label>
+                            <input type="text" className="form-control" name= "Name" value={Name} onChange={onInputChange}/>
                         </div>
-                        <br/>
-                        <div className="row g-3 align-items-center">
-                            <div className="col-auto">
-                                <label className="form-label"> Correo electronico</label>
-                            </div>
-                            <div className="col-auto">
-                                <input type="email" className="form-control" name= "email" value={email} onChange={onInputChange}/>
-                            </div>
+                    }
+
+                    {(ErrorSurname)
+                        ?<>
+                        <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
+                            <label className="form-label"> apellido</label>
+                            <input type="text" className="form-control" name= "Surname" value={Surname} onChange={onInputChange}/>
                         </div>
-                        <br/>
-                        <div className="row g-3 align-items-center">
-                            <div className="col-auto">
-                                <label className="form-label"> ingresa password</label>
-                            </div>
-                            <div className="col-auto">
-                                <input type="password" className="form-control" name= "password" value={password} onChange={onInputChange}/>
-                            </div>
-                            <div className="col-auto">
-                                <span id="passwordHelpInline" className="form-text">
-                                    debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
-                                </span>
-                            </div>
+                        <p>apellido es requerido</p>
+                        </>
+                        :<div className="mb-6 col-sm-4-auto p-4 text-center ">
+                            <label className="form-label"> apellido</label>
+                            <input type="text" className="form-control" name= "Surname" value={Surname} onChange={onInputChange}/>
                         </div>
-                        <br/>
-                        <div className="d-grid">
+                    }
+
+
+                    {(ErrorMail)
+                        ?<>
+                            <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
+                                <label className="form-label"> mail</label>
+                                <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
+                            </div> <p>mail es requerido</p>
+                        </>
+                        :<div className="mb-6 col-sm-4-auto p-4 text-center">
+                            <label className="form-label"> mail</label>
+                            <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
+                        </div>
+                    }
+
+                        {
+                        (!ErrorPassword)
+                        ?<div className="mb-6 col-sm-4-auto p-4 text-center">
+                            <label className="form-label"> password</label>
+                            <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                            <span id="passwordHelpInline" className="form-text">
+                                debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                            </span>
+                        </div>
+                        :<><div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
+                            <label className="form-label"> password</label>
+                            <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                            <span id="passwordHelpInline" className="form-text">
+                                debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                            </span>
+                        </div>
+                        <p>contraseña es requerido</p>
+                        </>
+                        }
+                        
+                        <div className="mb-6 col-sm-4-auto p-4 text-center">
                             <button type="submit" className="btn btn-primary" > registrarse</button>
                         </div>
                         
                         <div className="mb-6 col-sm-4-auto  p-5 text-center">
                             <span> tienes cuenta? </span> <Link to={"/auth/login"}>login</Link>
                         </div>
+ 
                     </form>
                 </div>
             </div>

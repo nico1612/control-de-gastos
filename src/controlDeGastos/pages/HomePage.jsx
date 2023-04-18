@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { TransaccionList } from "../components"
+
 import { useDispatch, useSelector } from "react-redux"
-import { startGettingTransacciones } from "../../store/transacciones/thunks"
 import { useNavigate } from "react-router-dom"
-import { TransaccionListHome } from "../components/TransaccionListHome"
+
+import { startGettingTransacciones } from "../../store/transacciones/thunks"
+import {TransaccionListHome, Button } from "../components"
 
 export const HomePage=()=>{
 
@@ -22,13 +23,18 @@ export const HomePage=()=>{
     return(
         <>
             <br/>
-            <div>monto actual: {actualBalance}</div>
+            <div className="text-center">monto actual: {actualBalance}</div>
             <br/>
-            <TransaccionListHome/>
+            <div className="text-center">
+                <TransaccionListHome/>
+            </div>
             <br/>
-            <button onClick={Movimientos}>
-            mas...
-            </button> 
+
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <Button Funcion={Movimientos} Name={'todos los movimientos'} />
+                </div>
+            </div>
             
         </>
     )
