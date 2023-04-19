@@ -1,16 +1,19 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Button } from "./Button"
+import { setActiveTransaccion } from "../../store/transacciones/transaccionesSlice"
+import { useNavigate } from "react-router-dom"
 
 export const TransaccionTable=()=>{
 
     const {Transactions} =useSelector(state=>state.transaciones)
-
+    const dispatch =useDispatch()
+    const navigate= useNavigate()
     const eliminar=()=>{
         dispatch(setActiveTransaccion(TransactionActual))
         dispatch(startEliminar())
     }
-    const iniciarModificar=()=>{
-        dispatch(setActiveTransaccion(TransactionActual))
+    const iniciarModificar=(Transaction)=>{
+        dispatch(setActiveTransaccion(Transaction))
         navigate("/modificar")
     }
 
@@ -31,15 +34,15 @@ export const TransaccionTable=()=>{
                         Transactions.map(Transaction=>( 
                             <>
                             <tr key={Transaction.id}>
-                                <td>{Transaction.id}</td>
-                                <td>{Transaction.user}</td>
-                                <td>{Transaction.concept}</td>        
-                                <td>{Transaction.category}</td>          
-                                <td>{Transaction.amount}</td>
-                                <td>{Transaction.date}</td>
-                                <td>{Transaction.transactionType}</td>
-                                <td><Button Funcion={iniciarModificar} Name={'Modificar'} /></td>
-                                <td><Button Funcion={eliminar} Name={'Eliminar'}/></td>
+                            <th>{Transaction.id}</th>
+                                <th>{Transaction.user}</th>
+                                <th>{Transaction.concept}</th>        
+                                <th>{Transaction.category}</th>          
+                                <th>{Transaction.amount}</th>
+                                <th>{Transaction.date}</th>
+                                <th>{Transaction.transactionType}</th>
+                                <th><Button Funcion={iniciarModificar(Transaction)} Name={'Modificar'} /></th>
+                                <th><Button Funcion={eliminar} Name={'Eliminar'}/></th>
                             </tr>
                             </>
                         ))

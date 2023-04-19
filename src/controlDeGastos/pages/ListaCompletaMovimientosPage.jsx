@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
-import { Button, TransaccionTable } from "../components"
+import { Button, TransaccionList } from "../components"
 import { setActiveTransaccion } from "../../store/transacciones"
 import { useNavigate } from "react-router-dom"
 
@@ -34,7 +34,7 @@ export const ListaCompletaMovimientosPage=()=>{
     return(
         <>
             <br/>
-            <TransaccionTable/>
+            <TransaccionList/>
             <br/>
             <div class="container bg-light">
                 <div class="col-md-12 text-center">

@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { startGettingTransacciones } from "../../store/transacciones/thunks"
-import { Button } from "../components"
-import { TablaHome } from "../components/TablaHome"
+import {TransaccionListHome, Button, TablaHome } from "../components"
 
 export const HomePage=()=>{
 

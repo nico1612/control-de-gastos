@@ -1,6 +1,6 @@
 import { deleteTransaccionById, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
 
-const url=import.meta.env.VITE_APP_IP
+const url= import.meta.env.VITE_APP_IP
 
 export const startGettingTransacciones=()=>{
     
@@ -29,24 +29,23 @@ export const startGettingTransaccionesAll=()=>{
 
 }
 
-export const startEliminar=()=>{
+export const startEliminar=({TransactionActual})=>{
 
     return async(dispatch,getState)=>{
         const {token} = getState().auth;
-        const {active:transaccion} = getState().transaciones;
 
         const option ={
             method: 'DELETE',
             headers:{
                 "Content-Type": "application/json",
-                "Authorization":`Bearer ${token}`
+                "Authorization":`bearer ${token}`
             },
 
         }
 
-        await fetch(`${url}/transaction/${transaccion.id}`,option)
+        await fetch(`${url}/transaction/${TransactionActual.id}`,option)
 
-        dispatch(deleteTransaccionById(transaccion.id))       
+        dispatch(deleteTransaccionById(TransactionActual.id))       
 
     }
 }
@@ -56,18 +55,23 @@ export const startingUpdating=({Id,Datas,TransaccionUpdate})=>{
     return async(dispatch,getState)=>{
 
         const {token} = getState().auth;
-        
-        
+
+        const Data={
+            transactionTypeId:Datas.TransactionTypeId,
+            date:Datas.date,
+            amount:Datas.Amount,
+            concept:Datas.Concept,
+            categoryId:Datas.CategoryId,
+        }
         const option ={
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization":`Bearer ${token}`
+                "Authorization":`bearer ${token}`
             },
-            body: JSON.stringify(Datas)
+            body: JSON.stringify(Data)
         }
         const result=await fetch(`${url}/transaction/${Id}`,option)
-        
         if(result.status){
             dispatch(updateTransaccion(TransaccionUpdate))
         }

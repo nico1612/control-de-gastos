@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { categoryId, transacionId } from "../helpers"
-import {  createNewTransaccion, startGettingTransaccionesAll } from "../../store/transacciones/thunks"
+import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
 import { useForm } from "../../hooks"
 import { crearTransaccion } from "../helpers/CrearTransaccion"
 
@@ -17,14 +17,16 @@ export const NuevaTransaccion=()=>{
     const navigate =useNavigate()
 
     useEffect(()=>{
+       
         formData={
             UserId:userId,
             Concept:Transaction.concept,
             Category:Transaction.category,
             Amount:Transaction.amount,
-            date:new Date().toJSON(),
+            date:new Date('2022-08-01T00:00:00.000Z').toJSON(),
             TransactionType:Transaction.transactionType
         }
+
         dispatch(startGettingTransaccionesAll())
     },[])
 

@@ -21,7 +21,7 @@ export const ModificarPage=()=>{
             Concept:Transaction.concept,
             Category:Transaction.category,
             Amount:Transaction.amount,
-            Date:Transaction.date,
+            date:Transaction.date,
             TransactionType:Transaction.transactionType
         }
     },[])
@@ -31,7 +31,7 @@ export const ModificarPage=()=>{
         Concept,
         Category,
         Amount,
-        Date,
+        date,
         TransactionType,
     onInputChange}= useForm(formData)
    
@@ -42,7 +42,7 @@ export const ModificarPage=()=>{
         const CategoryId=categoryId({Category, Categories})
         const Datas={
             TransactionTypeId,
-            Date,
+            date,
             Amount,
             Concept,
             CategoryId,
@@ -53,7 +53,7 @@ export const ModificarPage=()=>{
             Concept,
             Category,
             Amount,
-            Date,
+            date,
             TransactionType,  
         }
         

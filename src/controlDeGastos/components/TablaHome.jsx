@@ -20,13 +20,13 @@ export const TablaHome=()=>{
                     {
                         Transactions.map(Transaction=>( 
                             <tr key={Transaction.id}>
-                                <td>{Transaction.id}</td>
-                                <td>{Transaction.user}</td>
-                                <td>{Transaction.concept}</td>        
-                                <td>{Transaction.category}</td>          
-                                <td>{Transaction.amount}</td>
-                                <td>{Transaction.date}</td>
-                                <td>{Transaction.transactionType}</td>
+                                <th>{Transaction.id}</th>
+                                <th>{Transaction.user}</th>
+                                <th>{Transaction.concept}</th>        
+                                <th>{Transaction.category}</th>          
+                                <th>{Transaction.amount}</th>
+                                <th>{Transaction.date}</th>
+                                <th>{Transaction.transactionType}</th>
                             </tr>
                         ))
                     }
