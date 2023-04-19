@@ -33,8 +33,7 @@ export const ModificarPage=()=>{
         Amount,
         Date,
         TransactionType,
-        onInputChange}= useForm(formData)
-
+    onInputChange}= useForm(formData)
    
     const onSubmit=(event)=>{
         event.preventDefault()
@@ -57,6 +56,7 @@ export const ModificarPage=()=>{
             Date,
             TransactionType,  
         }
+        
         dispatch(startingUpdating({Id,Datas,TransaccionUpdate}));
         navigate(-1)
     }
@@ -80,6 +80,7 @@ export const ModificarPage=()=>{
                             <div name="category" onChange={onInputChange}>
                                 <ul className="list-group">
                                     <li className="list-group-item">
+                                    
                                         <input type="radio" value="Ingresos fijos" name="Category"  checked={("Ingresos fijos"===Category)} /> Ingresos fijos
                                     </li>
                                     <li className="list-group-item">
@@ -119,9 +120,6 @@ export const ModificarPage=()=>{
                         </div> 
                         <br/>
                         <Button Funcion={onSubmit} Name={'modificar'}/>
-                        {/*<button type="button" className="btn btn-success" onClick={onSubmit}>
-                            modificar
-                        </button>*/}
                     </form>
                 </div>
             </div>

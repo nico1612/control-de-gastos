@@ -14,9 +14,7 @@ export const startLogin=({Email, Password})=>{
             },
             body: JSON.stringify({"eMail":Email,"password":Password})
         };
-        console.log(Email)
         const result=await fetch(`${url}/user/login`, options)
-        console.log(result)
         if(result.ok){
             const {body}=await result.json()
             dispatch( login( body ));

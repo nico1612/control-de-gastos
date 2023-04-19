@@ -1,7 +1,6 @@
 
-export * from "./TransaccionCards"
 export * from "./Navbar"
-export * from "./TransaccionList"
 export * from "./Button"
 export * from "./ButtonIniciarCrear"
-export * from "./TransaccionListHome"
+export * from "./TablaHome"
+export * from "./TransaccionTable.jsx"

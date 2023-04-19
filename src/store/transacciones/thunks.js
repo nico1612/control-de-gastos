@@ -39,7 +39,7 @@ export const startEliminar=()=>{
             method: 'DELETE',
             headers:{
                 "Content-Type": "application/json",
-                "Authorization":`bearer ${token}`
+                "Authorization":`Bearer ${token}`
             },
 
         }
@@ -62,7 +62,7 @@ export const startingUpdating=({Id,Datas,TransaccionUpdate})=>{
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization":`bearer ${token}`
+                "Authorization":`Bearer ${token}`
             },
             body: JSON.stringify(Datas)
         }

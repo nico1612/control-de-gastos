@@ -22,7 +22,7 @@ export const NuevaTransaccion=()=>{
             Concept:Transaction.concept,
             Category:Transaction.category,
             Amount:Transaction.amount,
-            date:new Date()            ,
+            date:new Date().toJSON(),
             TransactionType:Transaction.transactionType
         }
         dispatch(startGettingTransaccionesAll())
@@ -76,22 +76,22 @@ export const NuevaTransaccion=()=>{
                             <div name="category" onChange={onInputChange}>
                                 <ul className="list-group">
                                     <li className="list-group-item">
-                                        <input type="radio" value="Ingresos fijos" name="Category"  checked={("Ingresos fijos"===Category)} /> Ingresos fijos
+                                        <input type="radio" value="Ingresos fijos" name="Category"/> Ingresos fijos
                                     </li>
                                     <li className="list-group-item">
-                                    <input type="radio" value="Ingresos ocasionales" name="Category" checked={("Ingresos ocasionales"===Category)} /> Ingresos ocasionales
+                                    <input type="radio" value="Ingresos ocasionales" name="Category"/> Ingresos ocasionales
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Viáticos" name="Category" checked={("Viáticos"===Category)} />Viáticos
+                                        <input type="radio" value="Viáticos" name="Category"/>Viáticos
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Alimentos y bebidas" name="Category" checked={("Alimentos y bebidas"===Category)} /> Alimentos y bebidas
+                                        <input type="radio" value="Alimentos y bebidas" name="Category"/> Alimentos y bebidas
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Víveres" name="Category" checked={("Víveres"===Category)} /> Víveres
+                                        <input type="radio" value="Víveres" name="Category"/> Víveres
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Salidas" name="Category" checked={("Salidas"===Category)} /> Salidas
+                                        <input type="radio" value="Salidas" name="Category"/> Salidas
                                     </li>
                                 </ul>
                             </div>                        
@@ -102,15 +102,15 @@ export const NuevaTransaccion=()=>{
                             <input type="text" className="form-control" name= "Amount" value={Amount} onChange={onInputChange}/>
                         </div>
                         <br></br>
-                        <div>transactionType</div>
+                        <div>tipo de transaccion</div>
 
                         <div name="TransactionType" onChange={onInputChange}>
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <input type="radio" value="Ingresos" name="TransactionType"  checked={("Ingresos"===TransactionType)} /> Ingresos
+                                    <input type="radio" value="Ingresos" name="TransactionType"/> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                <input type="radio" value="Egresos" name="TransactionType" checked={("Egresos"===TransactionType)} /> Egresos
+                                <input type="radio" value="Egresos" name="TransactionType"/> Egresos
                                 </li>
                             </ul>
                         </div> 
