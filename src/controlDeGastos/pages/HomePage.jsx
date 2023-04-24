@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { startGettingTransacciones } from "../../store/transacciones/thunks"
-import {TransaccionListHome, Button } from "../components"
+import {Button, TablaHome } from "../components"
 
 export const HomePage=()=>{
 
@@ -26,12 +26,12 @@ export const HomePage=()=>{
             <div className="text-center">monto actual: {actualBalance}</div>
             <br/>
             <div className="text-center">
-                <TransaccionListHome/>
+                <TablaHome/>
             </div>
             <br/>
 
-            <div class="container bg-light">
-                <div class="col-md-12 text-center">
+            <div className="container bg-light">
+                <div className="col-md-12 text-center">
                     <Button Funcion={Movimientos} Name={'todos los movimientos'} />
                 </div>
             </div>

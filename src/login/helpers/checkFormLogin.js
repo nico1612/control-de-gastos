@@ -4,7 +4,6 @@ export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
 
     let ok=true
     const word='@'
-    console.log(Email.includes(word))
 
     if (Email===''){
         setErrorMail(true)
@@ -21,7 +20,6 @@ export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
         setErrorPassword(false)
     }
     if(!Email.includes(word)){
-        console.log(Email.includes(word))
         setErrorMail(true)
         ok=false
     }

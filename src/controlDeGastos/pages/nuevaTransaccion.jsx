@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import { categoryId, transacionId } from "../helpers"
-import {  createNewTransaccion, startGettingTransaccionesAll } from "../../store/transacciones/thunks"
+import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
 import { useForm } from "../../hooks"
 import { crearTransaccion } from "../helpers/CrearTransaccion"
 
@@ -17,14 +17,16 @@ export const NuevaTransaccion=()=>{
     const navigate =useNavigate()
 
     useEffect(()=>{
+       
         formData={
             UserId:userId,
             Concept:Transaction.concept,
             Category:Transaction.category,
             Amount:Transaction.amount,
-            date:new Date()            ,
+            dates:new Date(),
             TransactionType:Transaction.transactionType
         }
+
         dispatch(startGettingTransaccionesAll())
     },[])
 
@@ -33,13 +35,15 @@ export const NuevaTransaccion=()=>{
         Concept,
         Category,
         Amount,
-        date,
+        dates,
         TransactionType,
-        onInputChange}= useForm(formData)
+        onInputChange
+    }= useForm(formData)
 
-   
+    
     const onSubmit=(event)=>{
         event.preventDefault()
+        dates.setHours(dates.getHours()-3)
         const TransactionTypeId =transacionId({TransactionType,TransactionTypes})
         const CategoryId= categoryId({Category, Categories});
         const data={
@@ -47,15 +51,10 @@ export const NuevaTransaccion=()=>{
             Concept,
             CategoryId,
             Amount,
-            date,
+            date:new Date(dates).toJSON(),
             TransactionTypeId,
         }
         crearTransaccion({data,token})
-        /*dispatch(createNewTransaccion({
-            data,
-            TransactionType,
-            Category,
-        }));*/
         navigate('/movimientos')
     }
 
@@ -76,22 +75,22 @@ export const NuevaTransaccion=()=>{
                             <div name="category" onChange={onInputChange}>
                                 <ul className="list-group">
                                     <li className="list-group-item">
-                                        <input type="radio" value="Ingresos fijos" name="Category"  checked={("Ingresos fijos"===Category)} /> Ingresos fijos
+                                        <input type="radio" value="Ingresos fijos" name="Category"/> Ingresos fijos
                                     </li>
                                     <li className="list-group-item">
-                                    <input type="radio" value="Ingresos ocasionales" name="Category" checked={("Ingresos ocasionales"===Category)} /> Ingresos ocasionales
+                                    <input type="radio" value="Ingresos ocasionales" name="Category"/> Ingresos ocasionales
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Viáticos" name="Category" checked={("Viáticos"===Category)} />Viáticos
+                                        <input type="radio" value="Viáticos" name="Category"/>Viáticos
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Alimentos y bebidas" name="Category" checked={("Alimentos y bebidas"===Category)} /> Alimentos y bebidas
+                                        <input type="radio" value="Alimentos y bebidas" name="Category"/> Alimentos y bebidas
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Víveres" name="Category" checked={("Víveres"===Category)} /> Víveres
+                                        <input type="radio" value="Víveres" name="Category"/> Víveres
                                     </li>
                                     <li className="list-group-item">
-                                        <input type="radio" value="Salidas" name="Category" checked={("Salidas"===Category)} /> Salidas
+                                        <input type="radio" value="Salidas" name="Category"/> Salidas
                                     </li>
                                 </ul>
                             </div>                        
@@ -102,15 +101,15 @@ export const NuevaTransaccion=()=>{
                             <input type="text" className="form-control" name= "Amount" value={Amount} onChange={onInputChange}/>
                         </div>
                         <br></br>
-                        <div>transactionType</div>
+                        <div>tipo de transaccion</div>
 
                         <div name="TransactionType" onChange={onInputChange}>
                             <ul className="list-group">
                                 <li className="list-group-item">
-                                    <input type="radio" value="Ingresos" name="TransactionType"  checked={("Ingresos"===TransactionType)} /> Ingresos
+                                    <input type="radio" value="Ingresos" name="TransactionType"/> Ingresos
                                 </li>
                                 <li className="list-group-item">
-                                <input type="radio" value="Egresos" name="TransactionType" checked={("Egresos"===TransactionType)} /> Egresos
+                                <input type="radio" value="Egresos" name="TransactionType"/> Egresos
                                 </li>
                             </ul>
                         </div> 

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { Button } from "./Button"
 import { Parrafo } from "./Parrafo"
 
-
 export const TransaccionCards=({Transaction})=>{
 
     const TransactionActual=Transaction
@@ -12,7 +11,7 @@ export const TransaccionCards=({Transaction})=>{
     const navigate=useNavigate()
     const eliminar=()=>{
         dispatch(setActiveTransaccion(TransactionActual))
-        dispatch(startEliminar())
+        dispatch(startEliminar({TransactionActual}))
     }
     const iniciarModificar=()=>{
         dispatch(setActiveTransaccion(TransactionActual))
@@ -32,9 +31,9 @@ export const TransaccionCards=({Transaction})=>{
 
                             <Parrafo Init={'Monto'} Value={Transaction.amount}/>
 
-                            <Parrafo Inicio={'Día'} Value={Transaction.date}/>
+                            <Parrafo Init={'Día'} Value={Transaction.date}/>
 
-                            <Parrafo Init={'Transacción'} Value={Transaction.transaccion}/>
+                            <Parrafo Init={'Transacción'} Value={Transaction.transactionType}/>
                             
                             <Button Funcion={iniciarModificar} Name={'Modificar'} />
                             
