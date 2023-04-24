@@ -35,6 +35,7 @@ export const ListaCompletaMovimientosPage=()=>{
         <>
             <br/>
             <TransaccionList/>
+            {/*<TransaccionTable/>*/}
             <br/>
             <div className="container bg-light">
                 <div className="col-md-12 text-center">

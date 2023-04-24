@@ -46,13 +46,13 @@ export const LoginPage=()=>{
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <h2 className="fw-bold text-center py-5">bienvenido</h2>
+                    <h2 className="fw-bold text-center py-5">Bienvenido</h2>
                 </div>
 
                 {
                     (error) &&
                     <div className="alert alert-danger" role="alert">
-                        error en usuario o contraseña
+                        Error en usuario o contraseña
                     </div>
                 }
 
@@ -63,12 +63,12 @@ export const LoginPage=()=>{
                         (ErrorMail)
                         ?<>
                             <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
-                                <label className="form-label"> mail</label>
+                                <label className="form-label"> Mail</label>
                                 <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
-                            </div> <p>mail es requerido correctamente</p>
+                            </div> <p>Mail es requerido correctamente</p>
                         </>
                         :<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> mail</label>
+                            <label className="form-label"> Mail</label>
                             <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
                         </div>
                     }
@@ -76,25 +76,25 @@ export const LoginPage=()=>{
                     {
                         (!ErrorPassword)
                         ?<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> password</label>
+                            <label className="form-label"> Password</label>
                             <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
                         </div>
                         :<>
                             <div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
-                                <label className="form-label"> password</label>
+                                <label className="form-label"> Password</label>
                                 <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
                             </div>
-                            <p>contraseña es requerido</p>
+                            <p>Contraseña es requerido</p>
                         </>
                     }
                     
                     
                     <div className="mb-6 col-sm-4-auto p-4 text-center">
-                        <button type="submit" className="btn btn-primary" onClick={onSubmit} > iniciar sesion</button>
+                        <button type="submit" className="btn btn-primary" onClick={onSubmit} > Iniciar sesion</button>
                     </div>
                     
                     <div className="my-3 mb-6 col-sm-4-auto p-5 text-center">
-                        <span>no tienes cuenta? </span> <Link to={"/auth/register"}>registrarse</Link>
+                        <span>No tienes cuenta? </span> <Link to={"/auth/register"}>Registrarse</Link>
                     </div>
                 </form>
             </div>

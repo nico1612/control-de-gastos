@@ -55,11 +55,11 @@ export const RegisterPage=()=>{
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <h2 className="fw-bold text-center py-5">registrese</h2>
+                        <h2 className="fw-bold text-center py-5">Registrese</h2>
                     </div>
                     {
                         (error) && <div className="alert alert-danger" role="alert">
-                                usuario registrado
+                                Usuario registrado
                             </div>
                     }
 
@@ -69,13 +69,13 @@ export const RegisterPage=()=>{
                     {(ErrorName)
                         ?<>
                         <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
-                            <label className="form-label"> nombre</label>
+                            <label className="form-label"> Nombre</label>
                             <input type="text" className="form-control" name= "Name" value={Name} onChange={onInputChange}/>
                         </div>
-                        <p>nombre es requerido</p>
+                        <p>Nombre es requerido</p>
                         </>
                         :<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> nombre</label>
+                            <label className="form-label"> Nombre</label>
                             <input type="text" className="form-control" name= "Name" value={Name} onChange={onInputChange}/>
                         </div>
                     }
@@ -83,13 +83,13 @@ export const RegisterPage=()=>{
                     {(ErrorSurname)
                         ?<>
                         <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
-                            <label className="form-label"> apellido</label>
+                            <label className="form-label"> Apellido</label>
                             <input type="text" className="form-control" name= "Surname" value={Surname} onChange={onInputChange}/>
                         </div>
-                        <p>apellido es requerido</p>
+                        <p>Apellido es requerido</p>
                         </>
                         :<div className="mb-6 col-sm-4-auto p-4 text-center ">
-                            <label className="form-label"> apellido</label>
+                            <label className="form-label"> Apellido</label>
                             <input type="text" className="form-control" name= "Surname" value={Surname} onChange={onInputChange}/>
                         </div>
                     }
@@ -98,12 +98,12 @@ export const RegisterPage=()=>{
                     {(ErrorMail)
                         ?<>
                             <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
-                                <label className="form-label"> mail</label>
+                                <label className="form-label"> Mail</label>
                                 <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
-                            </div> <p>mail es requerido</p>
+                            </div> <p>Mail es requerido</p>
                         </>
                         :<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> mail</label>
+                            <label className="form-label"> Mail</label>
                             <input type="email" className="form-control" name= "Email" value={Email} onChange={onInputChange}/>
                         </div>
                     }
@@ -111,29 +111,29 @@ export const RegisterPage=()=>{
                         {
                         (!ErrorPassword)
                         ?<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> password</label>
+                            <label className="form-label"> Password</label>
                             <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
                             <span id="passwordHelpInline" className="form-text">
-                                debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                                Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
                             </span>
                         </div>
                         :<><div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
-                            <label className="form-label"> password</label>
+                            <label className="form-label"> Password</label>
                             <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
                             <span id="passwordHelpInline" className="form-text">
-                                debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                                Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
                             </span>
                         </div>
-                        <p>contraseña es requerido</p>
+                        <p>Contraseña es requerido</p>
                         </>
                         }
                         
                         <div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <button type="submit" className="btn btn-primary" > registrarse</button>
+                            <button type="submit" className="btn btn-primary" > Registrarse</button>
                         </div>
                         
                         <div className="mb-6 col-sm-4-auto  p-5 text-center">
-                            <span> tienes cuenta? </span> <Link to={"/auth/login"}>login</Link>
+                            <span> Tienes cuenta? </span> <Link to={"/auth/login"}>Iniciar sesión</Link>
                         </div>
  
                     </form>

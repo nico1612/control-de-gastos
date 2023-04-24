@@ -6,27 +6,29 @@ export const TablaHome=()=>{
 
     return(
         <>
-            <table className="table table-sm ">
+            <table className="table align-middle table-striped table-bordered table-bordered border-primary">
                 <thead className="table-active">
-                    <th>Id</th>
-                    <th>Usuario</th>
-                    <th>Concepto</th>
-                    <th>Categoria</th>
-                    <th>Monto</th>
-                    <th>Dia</th>
-                    <th>Tipo de transaccion</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Concepto</th>
+                        <th>Categoria</th>
+                        <th>Monto</th>
+                        <th>Dia</th>
+                        <th>Tipo de transaccion</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-group-divider">
                     {
                         Transactions.map(Transaction=>( 
                             <tr key={Transaction.id}>
-                                <th>{Transaction.id}</th>
-                                <th>{Transaction.user}</th>
-                                <th>{Transaction.concept}</th>        
-                                <th>{Transaction.category}</th>          
-                                <th>{Transaction.amount}</th>
-                                <th>{Transaction.date}</th>
-                                <th>{Transaction.transactionType}</th>
+                                <td>{Transaction.id}</td>
+                                <td>{Transaction.user}</td>
+                                <td>{Transaction.concept}</td>
+                                <td>{Transaction.category}</td>
+                                <td>{Transaction.amount}</td>
+                                <td>{Transaction.date}</td>
+                                <td>{Transaction.transactionType}</td>
                             </tr>
                         ))
                     }

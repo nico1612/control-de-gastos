@@ -10,9 +10,9 @@ export const TransaccionTable=()=>{
     const dispatch=useDispatch()
     const navigate=useNavigate()
 
-    const eliminar=()=>{
-        dispatch(setActiveTransaccion(TransactionActual))
-        dispatch(startEliminar({TransactionActual}))
+    const eliminar=({Transaction})=>{
+        dispatch(setActiveTransaccion(Transaction))
+        dispatch(startEliminar({Transaction}))
     }
     const iniciarModificar=({Transaction})=>{
         dispatch(setActiveTransaccion(Transaction))
@@ -20,37 +20,31 @@ export const TransaccionTable=()=>{
     }
     return(
         <>
-        <table className="table table-sm ">
+            <table className="table align-middle table-striped table-bordered table-bordered border-primary">
                 <thead className="table-active">
-                    <th>Id</th>
-                    <th>Usuario</th>
-                    <th>Concepto</th>
-                    <th>Categoria</th>
-                    <th>Monto</th>
-                    <th>Dia</th>
-                    <th>Tipo de transaccion</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Concepto</th>
+                        <th>Categoria</th>
+                        <th>Monto</th>
+                        <th>Dia</th>
+                        <th>Tipo de transaccion</th>
+                    </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-group-divider">
                     {
                         Transactions.map(Transaction=>( 
                             <tr key={Transaction.id}>
-                                <th>{Transaction.id}</th>
-                                <th>{Transaction.user}</th>
-                                <th>{Transaction.concept}</th>        
-                                <th>{Transaction.category}</th>          
-                                <th>{Transaction.amount}</th>
-                                <th>{Transaction.date}</th>
-                                <th>{Transaction.transactionType}</th>
-                                <th><button onClick={iniciarModificar(Transaction)}>Modificar</button></th>
-                                <th>
-                                    <div className="container-fluid h-100"> 
-                                        <div className="row w-100">
-                                            <div className="d-grid gap-2">
-                                                <Button Funcion={eliminar} Name={'Eliminar'} Transaction={Transaction}/>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </th>
+                                <td>{Transaction.id}</td>
+                                <td>{Transaction.user}</td>
+                                <td>{Transaction.concept}</td>
+                                <td>{Transaction.category}</td>
+                                <td>{Transaction.amount}</td>
+                                <td>{Transaction.date}</td>
+                                <td>{Transaction.transactionType}</td>
+                                <td><button onClick={iniciarModificar({Transaction})}>Modificar</button></td>
+                                <td><button onClick={eliminar({Transaction})}>eliminar</button></td>
                             </tr>
                         ))
                     }

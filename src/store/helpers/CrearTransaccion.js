@@ -1,8 +1,8 @@
 import axios from "axios"
 
 
-export const crearTransaccion=async({data,token})=>{
-    const url=import.meta.env.VITE_APP_IP
+export const crearTransaccion=async({url,data,token})=>{
+
     await axios.post(`${url}/transaction/new`, {
         userId:data.userId,
         concept: data.Concept,
@@ -10,10 +10,11 @@ export const crearTransaccion=async({data,token})=>{
         amount: data.Amount,
         date: data.date,
         transactionTypeId: data.TransactionTypeId,
-    }, {
+      },
+      {
         headers: {
-            'Content-Type': 'application/json',
-            "Authorization":`Bearer ${token}`
+          'Content-Type': 'application/json',
+          "Authorization":`Bearer ${token}`
         }
       }
     )

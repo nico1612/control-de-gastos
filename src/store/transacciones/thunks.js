@@ -1,11 +1,10 @@
 import { deleteTransaccionById, setAllTransacciones, setCategories, setTenTransacciones, setTransacciones, setTransactionTypes, updateTransaccion } from "./transaccionesSlice"
 
-const url='http://54.174.195.72:3001'
-//import.meta.env.VITE_APP_IP
+const url=import.meta.env.VITE_APP_IP
 
 export const startGettingTransacciones=()=>{
     
-    return async (dispatch,getState)=>{
+    return async (dispatch)=>{
 
         const transacciones= await fetch(`${url}/`)
 
@@ -16,7 +15,7 @@ export const startGettingTransacciones=()=>{
 
 export const startGettingTransaccionesAll=()=>{
 
-    return async (dispatch,getState)=>{
+    return async (dispatch)=>{
 
         const transacciones= await fetch(`${url}/transaction`)
         const {body}= await transacciones.json()
@@ -34,7 +33,6 @@ export const startEliminar=({TransactionActual})=>{
 
     return async(dispatch,getState)=>{
         const {token} = getState().auth;
-
         const option ={
             method: 'DELETE',
             headers:{
@@ -44,13 +42,13 @@ export const startEliminar=({TransactionActual})=>{
 
         }
         await fetch(`${url}/transaction/${TransactionActual.id}`,option)
-
+        //await EliminarTransaccion({url,TransactionActual,token}) sin probar
         dispatch(deleteTransaccionById(TransactionActual.id))       
 
     }
 }
 
-export const startingUpdating=({Id,Datas,TransaccionUpdate})=>{
+export const startingUpdating=({Id,Datas,TransactionActual})=>{
 
     return async(dispatch,getState)=>{
 
@@ -72,10 +70,10 @@ export const startingUpdating=({Id,Datas,TransaccionUpdate})=>{
             body: JSON.stringify(Data)
         }
         const result=await fetch(`${url}/transaction/${Id}`,option)
+        //const {result} = await ActualizarTransaccion(Datas,token,url) sin probar
         if(result.status){
-            dispatch(updateTransaccion(TransaccionUpdate))
+            dispatch(updateTransaccion(TransactionActual))
         }
-        
     }
 }
 
@@ -103,5 +101,6 @@ export const createNewTransaccion=({transactionTypeId,date,amount,concept,catego
         }
 
         await fetch(`${url}/transaction/new` , option)
+        //await CrearTransaccion(url,data,token) sin probar
     }
 }

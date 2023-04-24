@@ -70,7 +70,7 @@ export const transaccionSlice = createSlice({
                 return Transaction
             })
 
-            state.messageSaved=`${action.payload.title}, actualizada correctamente`
+            //state.messageSaved=`${action.payload.title}, actualizada correctamente`
         },
         
        

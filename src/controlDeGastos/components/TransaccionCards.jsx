@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux"
 import { setActiveTransaccion, startEliminar } from "../../store/transacciones"
 import { useNavigate } from "react-router-dom"
-import { Button } from "./Button"
 import { Parrafo } from "./Parrafo"
+import { Button } from "./Button"
 
 export const TransaccionCards=({Transaction})=>{
 
@@ -34,16 +34,11 @@ export const TransaccionCards=({Transaction})=>{
                             <Parrafo Init={'Día'} Value={Transaction.date}/>
 
                             <Parrafo Init={'Transacción'} Value={Transaction.transactionType}/>
-                            
-                            <Button Funcion={iniciarModificar} Name={'Modificar'} />
-                            
-                            <div className="container-fluid h-100"> 
-                                <div className="row w-100">
-                                    <div className="d-grid gap-2">
-                                        <Button Funcion={eliminar} Name={'Eliminar'}/>
-                                    </div>
-                                </div>
-                            </div>
+
+                            <div className="btn-group" role="group" aria-label="Basic example">
+                                <Button Funcion={iniciarModificar} Name={'Modificar'}/>
+                                <Button Funcion={eliminar} Name={'Eliminar'}/>
+                            </div>                                
                         </div>
                     </div>
                 </div>
