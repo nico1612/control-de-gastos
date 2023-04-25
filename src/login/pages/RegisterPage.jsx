@@ -1,13 +1,11 @@
-
 import { useEffect } from "react"
 
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
-import { startRegister } from "../../store/auth/thunks"
-import { setError } from "../../store/auth/authSlice"
+import { startRegister,setError } from "../../store/"
 import { useError, useForm } from "../../hooks"
-import { checkFormRegister } from "../helpers"
+import { checkFormLogin, checkFormRegister } from "../helpers"
 
 const formData={ 
     Email:'',
@@ -22,6 +20,7 @@ export const RegisterPage=()=>{
 
     const {error} =useSelector(state=>state.auth)
     const dispatch =useDispatch()
+
     const {ErrorMail,
         setErrorMail,
         ErrorPassword,
@@ -29,23 +28,19 @@ export const RegisterPage=()=>{
         ErrorName,
         setErrorName,
         ErrorSurname,
-        setErrorSurname}= useError()
+        setErrorSurname
+    }= useError()
+
     useEffect(()=>{
         if(error)
         dispatch(setError())
     })
+
     const onSubmit=(event)=>{
 
         event.preventDefault()
-        if(checkFormRegister({ErrorName,Email,
-            Password,
-            Name,
-            Surname,
-            setErrorMail,
-            setErrorName,
-            setErrorPassword,
-            setErrorSurname})){
 
+        if(checkFormRegister({ Name, Surname, setErrorName, setErrorSurname}) && checkFormLogin({Email,Password,setErrorMail,setErrorPassword})){
             dispatch( startRegister({ Email, Password,Name,Surname }) );
         }
     }
@@ -57,6 +52,7 @@ export const RegisterPage=()=>{
                     <div className="col">
                         <h2 className="fw-bold text-center py-5">Registrese</h2>
                     </div>
+                    
                     {
                         (error) && <div className="alert alert-danger" role="alert">
                                 Usuario registrado
@@ -64,7 +60,6 @@ export const RegisterPage=()=>{
                     }
 
                     <form className="col-xs-12" onSubmit={onSubmit}>
-
 
                     {(ErrorName)
                         ?<>
@@ -94,7 +89,6 @@ export const RegisterPage=()=>{
                         </div>
                     }
 
-
                     {(ErrorMail)
                         ?<>
                             <div className="mb-6 col-sm-4-auto p-4 text-center border border-danger">
@@ -109,25 +103,26 @@ export const RegisterPage=()=>{
                     }
 
                         {
-                        (!ErrorPassword)
-                        ?<div className="mb-6 col-sm-4-auto p-4 text-center">
-                            <label className="form-label"> Password</label>
-                            <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
-                            <span id="passwordHelpInline" className="form-text">
-                                Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
-                            </span>
-                        </div>
-                        :<><div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
-                            <label className="form-label"> Password</label>
-                            <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
-                            <span id="passwordHelpInline" className="form-text">
-                                Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
-                            </span>
-                        </div>
-                        <p>Contraseña es requerido</p>
-                        </>
+                            (!ErrorPassword)
+                            ?<div className="mb-6 col-sm-4-auto p-4 text-center">
+                                <label className="form-label"> Password</label>
+                                <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                                <span id="passwordHelpInline" className="form-text">
+                                    Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                                </span>
+                            </div>
+                            :<>
+                                <div className="mb-6 col-sm-4-auto p-4 text-center border  border-danger">
+                                    <label className="form-label"> Password</label>
+                                    <input type="password" className="form-control" name= "Password" value={Password} onChange={onInputChange}/>
+                                    <span id="passwordHelpInline" className="form-text">
+                                        Debe tener 8 caracteres, por lo menos 1 mayuscula, 1 minuscula, 1 numero y 1 caracter especial.
+                                    </span>
+                                </div>
+                                <p>Contraseña es requerido</p>
+                            </>
                         }
-                        
+
                         <div className="mb-6 col-sm-4-auto p-4 text-center">
                             <button type="submit" className="btn btn-primary" > Registrarse</button>
                         </div>

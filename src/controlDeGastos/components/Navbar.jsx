@@ -1,15 +1,17 @@
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { startLogout } from "../../store/auth/thunks"
+
+import { startLogout } from "../../store"
 import { Button } from "./Button"
 
-
 export const Navbar =()=>{
+
     const dispatch=useDispatch()
 
     const logouts=()=>{
         dispatch(startLogout())
     }
+
     return(
         <nav className="navbar navbar-expand-lg bg-body-tertiary navbar bg-dark border" data-bs-theme="dark">
             <div className="container-fluid">
@@ -34,7 +36,5 @@ export const Navbar =()=>{
                 <Button Funcion={logouts} Name={'logout'}/>
             </div>
         </nav>
-
-
     )
 }

@@ -3,21 +3,21 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { categoryId, transacionId } from "../helpers"
-import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
+import { dataFormat } from "../helpers"
+import { createNewTransaccion, startGettingTransaccionesAll } from "../../store"
 import { useForm } from "../../hooks"
-import { crearTransaccion } from "../helpers/CrearTransaccion"
-
 
 let formData
 export const NuevaTransaccion=()=>{
+
     const dispatch =useDispatch()
-    const {active:Transaction,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
-    const {userId,token} =useSelector(state=>state.auth)
     const navigate =useNavigate()
 
+    const {userId} =useSelector(state=>state.auth)
+    const {active:Transaction,Categories,TransactionTypes} =useSelector(state=>state.transaciones)
+
     useEffect(()=>{
-       
+
         formData={
             UserId:userId,
             Concept:Transaction.concept,
@@ -30,7 +30,6 @@ export const NuevaTransaccion=()=>{
         dispatch(startGettingTransaccionesAll())
     },[])
 
-
     const {
         Concept,
         Category,
@@ -40,21 +39,12 @@ export const NuevaTransaccion=()=>{
         onInputChange
     }= useForm(formData)
 
-    
     const onSubmit=(event)=>{
         event.preventDefault()
-        dates.setHours(dates.getHours()-3)
-        const TransactionTypeId =transacionId({TransactionType,TransactionTypes})
-        const CategoryId= categoryId({Category, Categories});
-        const data={
-            userId,
-            Concept,
-            CategoryId,
-            Amount,
-            date:new Date(dates).toJSON(),
-            TransactionTypeId,
-        }
-        crearTransaccion({data,token})
+
+        const {data} =dataFormat({Concept, Category, Amount, dates, TransactionType,userId,Categories,TransactionTypes})
+
+        dispatch(createNewTransaccion({data}))
         navigate('/movimientos')
     }
 

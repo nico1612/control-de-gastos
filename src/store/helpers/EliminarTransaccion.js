@@ -1,7 +1,6 @@
-import axios from "axios"
-
 
 export const EliminarTransaccion=async({url,TransactionActual,token})=>{
+
     const option ={
         method: 'DELETE',
         headers:{
@@ -10,5 +9,6 @@ export const EliminarTransaccion=async({url,TransactionActual,token})=>{
         },
 
     }
+
     await fetch(`${url}/transaction/${TransactionActual.id}`,option)
 }

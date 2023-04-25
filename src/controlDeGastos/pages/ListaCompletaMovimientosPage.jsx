@@ -1,11 +1,10 @@
 import { useEffect } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
-
-import { startGettingTransaccionesAll } from "../../store/transacciones/thunks"
-import { Button, TransaccionList, TransaccionTable } from "../components"
-import { setActiveTransaccion } from "../../store/transacciones"
 import { useNavigate } from "react-router-dom"
+
+import { startGettingTransaccionesAll,setActiveTransaccion } from "../../store"
+import { Button, TransaccionList, TransaccionTable } from "../components"
 
 export const ListaCompletaMovimientosPage=()=>{
 

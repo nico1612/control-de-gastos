@@ -1,6 +1,6 @@
 
+export const ActualizarTransaccion=async({Id,Datas,token,url})=>{
 
-export const ActualizarTransaccion=async({Datas,token,url})=>{
     const Data={
         transactionTypeId:Datas.TransactionTypeId,
         date:Datas.date,
@@ -8,6 +8,7 @@ export const ActualizarTransaccion=async({Datas,token,url})=>{
         concept:Datas.Concept,
         categoryId:Datas.CategoryId,
     }
+
     const option ={
         method: 'PATCH',
         headers: {
@@ -18,4 +19,7 @@ export const ActualizarTransaccion=async({Datas,token,url})=>{
     }
     const result=await fetch(`${url}/transaction/${Id}`,option)
 
+    return {
+        result
+    }
 }

@@ -1,5 +1,4 @@
 
-
 export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
 
     let ok=true
@@ -12,6 +11,7 @@ export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
     else{
         setErrorMail(false)
     }
+
     if(Password===''){
         setErrorPassword(true)
         ok=false
@@ -19,6 +19,7 @@ export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
     else{
         setErrorPassword(false)
     }
+
     if(!Email.includes(word)){
         setErrorMail(true)
         ok=false
@@ -26,5 +27,6 @@ export const checkFormLogin=({Email,Password,setErrorMail,setErrorPassword})=>{
     else{
         setErrorMail(false)
     }
+
     return ok
 }

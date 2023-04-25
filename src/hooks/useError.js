@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-
 export const useError=()=>{
     const [ErrorMail,setErrorMail] =useState(false)
     const [ErrorPassword,setErrorPassword] =useState(false)

@@ -1,3 +1,4 @@
 export * from "./categoryId"
 export * from "./transaccionId"
-export * from "./CrearTransaccion"
+export * from "./dataFormat"
+export * from "./dataFormatModificar"

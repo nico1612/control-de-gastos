@@ -3,8 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
-import { startLogin } from "../../store/auth/thunks"
-import { setError } from "../../store/auth/authSlice"
+import { startLogin,setError } from "../../store/"
 import { useError, useForm } from "../../hooks"
 import { checkFormLogin } from "../helpers"
 
@@ -17,21 +16,24 @@ export const LoginPage=()=>{
 
     const dispatch =useDispatch()
     const {Email,Password,onInputChange}= useForm(formData)
+
     const {ErrorMail,
         setErrorMail,
         ErrorPassword,
         setErrorPassword
     }= useError()
+
     const {error} =useSelector(state=>state.auth)
 
     useEffect(()=>{
         if(error)
         dispatch(setError())
-    })
+    },[])
 
     const onSubmit=(event)=>{
+
         event.preventDefault()
-        
+
         if(checkFormLogin({Email,
             Password,
             setErrorMail,
@@ -39,26 +41,24 @@ export const LoginPage=()=>{
             })){
             dispatch( startLogin( {Email, Password} ) );
         }
-        
     }
 
     return(
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <h2 className="fw-bold text-center py-5">Bienvenido</h2>
+                    <h1 className="fw-bold text-center py-5">Bienvenido</h1>
                 </div>
 
                 {
                     (error) &&
                     <div className="alert alert-danger" role="alert">
-                        Error en usuario o contraseña
+                        usuario y/o contraseña incorrectas
                     </div>
                 }
 
                 <form onSubmit={onSubmit}>
-                    
-
+    
                     {
                         (ErrorMail)
                         ?<>
@@ -87,18 +87,16 @@ export const LoginPage=()=>{
                             <p>Contraseña es requerido</p>
                         </>
                     }
-                    
-                    
+
                     <div className="mb-6 col-sm-4-auto p-4 text-center">
                         <button type="submit" className="btn btn-primary" onClick={onSubmit} > Iniciar sesion</button>
                     </div>
-                    
+
                     <div className="my-3 mb-6 col-sm-4-auto p-5 text-center">
                         <span>No tienes cuenta? </span> <Link to={"/auth/register"}>Registrarse</Link>
                     </div>
                 </form>
             </div>
-
         </div>
     )
 }

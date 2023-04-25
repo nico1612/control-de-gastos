@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { startGettingTransacciones } from "../../store/transacciones/thunks"
+import { startGettingTransacciones } from "../../store"
 import {Button, TablaHome } from "../components"
 
 export const HomePage=()=>{
@@ -20,6 +20,7 @@ export const HomePage=()=>{
     const Movimientos=()=>{
         navigate("/movimientos")
     }
+
     return(
         <>
             <br/>
@@ -30,7 +31,7 @@ export const HomePage=()=>{
             </div>
             <br/>
 
-            <div className="container bg-light">
+            <div className="container">
                 <div className="col-md-12 text-center">
                     <Button Funcion={Movimientos} Name={'todos los movimientos'} />
                 </div>

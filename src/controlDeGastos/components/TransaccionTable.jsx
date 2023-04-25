@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { Button } from "./Button"
-import { setActiveTransaccion, startEliminar } from "../../store/transacciones"
-
+import { setActiveTransaccion, startEliminar } from "../../store"
 
 export const TransaccionTable=()=>{
 
@@ -14,10 +12,12 @@ export const TransaccionTable=()=>{
         dispatch(setActiveTransaccion(Transaction))
         dispatch(startEliminar({Transaction}))
     }
+
     const iniciarModificar=({Transaction})=>{
         dispatch(setActiveTransaccion(Transaction))
         navigate("/modificar")
     }
+
     return(
         <>
             <table className="table align-middle table-striped table-bordered table-bordered border-primary">
